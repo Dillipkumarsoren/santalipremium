@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -2001,6 +2002,15 @@
             }, 5000); // Rotate every 5 seconds
         }
 
+        // Shuffle array function
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
         // Video player control visibility functions
         function showPlayerControls() {
             clearTimeout(hideControlsTimeout);
@@ -2293,254 +2303,200 @@
         }
 
         // Search and filtering functions
-        function searchVideos() {
-            const searchTerm = searchInput.value.trim().toLowerCase();
-            if (searchTerm === '') {
-                filterVideosByCategory();
-                return;
-            }
-            
-            const filteredVideos = videos.filter(video => 
-                (video.enabled && (video.title.toLowerCase().includes(searchTerm) ||
-                (video.description && video.description.toLowerCase().includes(searchTerm)) ||
-                (video.category && video.category.toLowerCase().includes(searchTerm)) ||
-                (video.labels && video.labels.some(label => label.toLowerCase().includes(searchTerm)))))
-            );
-            
-            displayVideos(filteredVideos);
-        }
+function searchVideos() {
+    const query = searchInput.value.trim().toLowerCase();
+    if (query === '') {
+        filterVideosByCategory();
+        return;
+    }
 
-        function filterVideosByCategory() {
-            if (currentCategory === 'all') {
-                displayVideos(videos.filter(video => video.enabled));
-                return;
-            }
-            
-            const filteredVideos = videos.filter(video => 
-                video.enabled && video.category && video.category.toLowerCase() === currentCategory
-            );
-            
-            displayVideos(filteredVideos);
-        }
+    const filteredVideos = videos.filter(video => 
+        video.enabled && (
+            video.title.toLowerCase().includes(query) ||
+            (video.description && video.description.toLowerCase().includes(query)) ||
+            (video.category && video.category.toLowerCase().includes(query)) ||
+            (video.labels && video.labels.some(label => label.toLowerCase().includes(query)))
+        )
+    );
 
-        // Video loading and display functions
-        function showLoadingSkeleton() {
-            videosGrid.innerHTML = '';
-            loadingContainer.style.display = 'flex';
-            
-            for (let i = 0; i < 8; i++) {
-                const skeletonCard = document.createElement('div');
-                skeletonCard.className = 'video-card';
-                skeletonCard.innerHTML = `
-                    <div class="thumbnail skeleton skeleton-thumbnail"></div>
-                    <div class="video-info">
-                        <div class="video-content">
-                            <div class="youtube-logo">
-                                <i class="fab fa-youtube"></i>
-                                <span>YouTube</span>
-                            </div>
-                            <div class="skeleton skeleton-title"></div>
-                            <div class="skeleton skeleton-description"></div>
-                        </div>
-                        <div class="video-badges">
-                            <div class="skeleton" style="width: 60px; height: 16px;"></div>
-                            <div class="skeleton" style="width: 40px; height: 16px;"></div>
-                        </div>
+    displayVideos(filteredVideos);
+}
+
+function filterVideosByCategory() {
+    let filteredVideos = videos.filter(video => video.enabled);
+
+    if (currentCategory !== 'all') {
+        filteredVideos = filteredVideos.filter(video => video.category === currentCategory);
+    }
+
+    displayVideos(filteredVideos);
+}
+
+// Display videos with shuffle
+function displayVideos(videosToDisplay) {
+    videosGrid.innerHTML = '';
+
+    if (videosToDisplay.length === 0) {
+        videosGrid.innerHTML = `
+            <div class="empty-album" style="grid-column: 1 / -1;">
+                <i class="fas fa-video-slash"></i>
+                <p>No videos found in this category</p>
+            </div>
+        `;
+        return;
+    }
+
+    // Shuffle the videos array using Fisher-Yates algorithm
+    const shuffledVideos = shuffleArray([...videosToDisplay]);
+
+    shuffledVideos.forEach(video => {
+        const videoCard = document.createElement('div');
+        videoCard.className = `video-card ${video.enabled ? '' : 'disabled'}`;
+        videoCard.innerHTML = `
+            <div class="thumbnail">
+                <img src="https://img.youtube.com/vi/${getYouTubeId(video.url)}/hqdefault.jpg" alt="${video.title}">
+            </div>
+            <div class="video-info">
+                <div class="video-content">
+                    <div class="youtube-logo">
+                        <i class="fab fa-youtube"></i>
+                        <button class="copy-btn" data-url="${video.url}" title="Copy YouTube Link">
+                            <i class="fas fa-copy"></i>
+                        </button>
                     </div>
-                `;
-                videosGrid.appendChild(skeletonCard);
-            }
-        }
+                    <div class="video-title">${video.title}</div>
+                    ${video.description ? `<div class="video-description">${video.description}</div>` : ''}
+                </div>
+                <div class="video-badges">
+                    ${video.isPremium ? '<span class="premium-badge"><i class="fas fa-crown"></i> Premium</span>' : ''}
+                    ${video.category ? `<span class="video-category">${video.category}</span>` : ''}
+                </div>
+            </div>
+            ${!video.enabled ? '<div class="disabled-overlay">Video Disabled</div>' : ''}
+        `;
 
-        function displayVideos(videosToDisplay) {
-            videosGrid.innerHTML = '';
-            
-            if (videosToDisplay.length === 0) {
-                let message = '';
-                switch(currentCategory) {
-                    case 'album':
-                        message = 'No albums found';
-                        break;
-                    case 'movie':
-                        message = 'No movies found';
-                        break;
-                    case 'comedy':
-                        message = 'No comedy videos found';
-                        break;
-                    case 'reels':
-                        message = 'No reels found';
-                        break;
-                    default:
-                        message = 'No videos found';
-                }
-                videosGrid.innerHTML = `
-                    <div style="grid-column: 1 / -1; text-align: center;">
-                        <div class="empty-album">
-                            <i class="glyphicon glyphicon-music"></i>
-                            <p>${message}</p>
-                        </div>
-                    </div>
-                `;
-                return;
-            }
-            
-            videosToDisplay.forEach(video => {
-                const videoCard = createVideoCard(video);
-                if (videoCard) {
-                    videosGrid.appendChild(videoCard);
+        if (video.enabled) {
+            videoCard.addEventListener('click', (e) => {
+                if (!e.target.classList.contains('copy-btn') && !e.target.closest('.copy-btn')) {
+                    showVideoPlayer(video);
                 }
             });
         }
 
-        function createVideoCard(video) {
-            if (!video || !video.id || !video.url || !getYouTubeId(video.url)) {
-                console.error("Invalid video data:", video);
-                return null;
-            }
-            
-            const videoCard = document.createElement('div');
-            videoCard.className = 'video-card';
-            videoCard.dataset.videoId = video.id;
-            
-            // Add disabled class if video is not enabled
-            if (!video.enabled) {
-                videoCard.classList.add('disabled');
-            }
-            
-            const videoId = getYouTubeId(video.url);
-            let thumbnailUrl = video.thumbnail || video.thumbnailUrl || 
-                             `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
-
-            videoCard.innerHTML = `
-                <div class="thumbnail" aria-label="Play video">
-                    <img src="${thumbnailUrl}" alt="${video.title}" onerror="this.src='https://via.placeholder.com/300x169/FF0000/000000?text=Video'">
-                </div>
-                <div class="video-info">
-                    <div class="video-content">
-                        <div class="youtube-logo">
-                            <div>
-                                <i class="fab fa-youtube"></i>
-                                <span>YouTube</span>
-                            </div>
-                            <div>
-                                <button class="copy-btn" aria-label="Copy video link">
-                                    <i class="fas fa-copy"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="video-title">${video.title}</div>
-                        <div class="video-description">${video.description || ''}</div>
-                    </div>
-                    <div class="video-badges">
-                        ${video.isPremium ? '<span class="premium-badge"><i class="fas fa-crown"></i>PREMIUM</span>' : ''}
-                        <span class="video-category">${video.category ? video.category.toUpperCase() : 'GENERAL'}</span>
-                    </div>
-                </div>
-                ${!video.enabled ? '<div class="disabled-overlay">Video Disabled</div>' : ''}
-            `;
-
-            // Only add click event if video is enabled
-            if (video.enabled) {
-                videoCard.querySelector('.thumbnail').addEventListener('click', () => {
-                    showVideoPlayer(video);
-                });
-            }
-            
-            videoCard.querySelector('.copy-btn').addEventListener('click', (e) => {
+        const copyButton = videoCard.querySelector('.copy-btn');
+        if (copyButton) {
+            copyButton.addEventListener('click', (e) => {
                 e.stopPropagation();
                 copyToClipboard(video.url);
-                showToast('Video link copied!');
+                showToast('Video link copied to clipboard!');
             });
-            
-            return videoCard;
         }
 
-        // Utility functions
-        function generateUniqueId() {
-            return 'vid-' + Math.random().toString(36).substr(2, 9);
-        }
+        videosGrid.appendChild(videoCard);
+    });
+}
 
-        function getYouTubeId(url) {
-            if (!url) return null;
-            
-            if (url.includes('youtu.be/')) {
-                return url.split('youtu.be/')[1].split(/[?&#]/)[0];
-            }
-            
-            const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
-            const match = url.match(regExp);
-            return (match && match[2].length === 11) ? match[2] : null;
-        }
+// Utility functions
+function showLoadingSkeleton() {
+    videosGrid.innerHTML = '';
+    for (let i = 0; i < 8; i++) {
+        const skeletonCard = document.createElement('div');
+        skeletonCard.className = 'video-card';
+        skeletonCard.innerHTML = `
+            <div class="thumbnail skeleton skeleton-thumbnail"></div>
+            <div class="video-info">
+                <div class="video-content">
+                    <div class="skeleton skeleton-title"></div>
+                    <div class="skeleton skeleton-description"></div>
+                    <div class="skeleton skeleton-description"></div>
+                </div>
+                <div class="video-badges">
+                    <div class="skeleton skeleton-meta"></div>
+                </div>
+            </div>
+        `;
+        videosGrid.appendChild(skeletonCard);
+    }
+}
 
-        function copyToClipboard(text) {
-            const textarea = document.createElement('textarea');
-            textarea.value = text;
-            document.body.appendChild(textarea);
-            textarea.select();
-            document.execCommand('copy');
-            document.body.removeChild(textarea);
-        }
+function getYouTubeId(url) {
+    if (!url) return null;
+    const regex = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/;
+    const match = url.match(regex);
+    return match ? match[1] : null;
+}
 
-        function showToast(message) {
-            toast.textContent = message;
-            toast.classList.add('show');
-            setTimeout(() => {
-                toast.classList.remove('show');
-            }, 2000);
-        }
+function copyToClipboard(text) {
+    if (navigator.clipboard) {
+        navigator.clipboard.writeText(text).catch(err => {
+            console.error('Failed to copy:', err);
+        });
+    } else {
+        const textarea = document.createElement('textarea');
+        textarea.value = text;
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textarea);
+    }
+}
 
-        function toggleMenuPopup() {
-            menuPopup.classList.toggle('show');
-        }
+function showToast(message) {
+    toast.textContent = message;
+    toast.classList.add('show');
+    setTimeout(() => {
+        toast.classList.remove('show');
+    }, 2000);
+}
 
-        function activateSearch() {
-            searchBox.classList.add('active');
-            backButton.classList.add('active');
-            appLogo.classList.add('hidden');
-            titleBar.style.display = 'none';
-            searchInput.focus();
-            searchInput.style.display = 'block';
-        }
+function activateSearch() {
+    searchBox.classList.add('active');
+    appLogo.classList.add('hidden');
+    backButton.classList.add('active');
+    searchInput.focus();
+    titleBar.style.display = 'none';
+}
 
-        function deactivateSearch() {
-            searchBox.classList.remove('active');
-            backButton.classList.remove('active');
-            appLogo.classList.remove('hidden');
-            titleBar.style.display = 'flex';
-            searchInput.value = '';
-            searchInput.style.display = 'none';
-            searchInput.blur();
-        }
+function deactivateSearch() {
+    searchBox.classList.remove('active');
+    appLogo.classList.remove('hidden');
+    backButton.classList.remove('active');
+    searchInput.value = '';
+    titleBar.style.display = 'flex';
+}
 
-        function shareContent(platform) {
-            const shareUrl = linksToRotate[currentLinkIndex];
-            const shareText = 'Check out this Santali Premium content!';
-            
-            let url = '';
-            
-            switch(platform) {
-                case 'telegram':
-                    url = `https://t.me/share/url?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(shareText)}`;
-                    break;
-                case 'whatsapp':
-                    url = `https://wa.me/?text=${encodeURIComponent(shareText + ' ' + shareUrl)}`;
-                    break;
-                case 'facebook':
-                    url = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`;
-                    break;
-                case 'twitter':
-                    url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`;
-                    break;
-                default:
-                    return;
-            }
-            
-            window.open(url, '_blank', 'noopener,noreferrer');
-            shareModal.classList.remove('show');
-        }
+function shareContent(platform) {
+    const shareUrl = encodeURIComponent(linksToRotate[currentLinkIndex]);
+    const shareText = encodeURIComponent('Check out this awesome Santali Premium content!');
+    let url;
 
-        // Initialize the application
-        document.addEventListener('DOMContentLoaded', initApp);
+    switch (platform) {
+        case 'telegram':
+            url = `https://t.me/share/url?url=${shareUrl}&text=${shareText}`;
+            break;
+        case 'whatsapp':
+            url = `https://wa.me/?text=${shareText}%20${shareUrl}`;
+            break;
+        case 'facebook':
+            url = `https://www.facebook.com/sharer/sharer.php?u=${shareUrl}`;
+            break;
+        case 'twitter':
+            url = `https://twitter.com/intent/tweet?url=${shareUrl}&text=${shareText}`;
+            break;
+        default:
+            return;
+    }
+
+    window.open(url, '_blank');
+    shareModal.classList.remove('show');
+}
+
+function generateUniqueId() {
+    return '_' + Math.random().toString(36).substr(2, 9);
+}
+
+// Initialize the app
+initApp();
     </script>
 </body>
 </html>
