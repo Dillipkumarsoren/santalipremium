@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -88,6 +87,7 @@
             cursor: pointer;
         }
         
+        /* Mobile video player styles */
         .video-player {
             position: fixed;
             width: 90%;
@@ -107,33 +107,33 @@
             touch-action: none;
         }
         
-        .video-player.dragging {
-            transition: none;
-            box-shadow: 0 0 30px rgba(255,0,0,0.5);
-        }
-        
-        .video-player.top-position {
-            top: 20px;
-            bottom: auto;
-            transform: translateX(-50%);
-        }
-        
-        .video-player.bottom-position {
-            top: auto;
-            bottom: 20px;
-            transform: translateX(-50%);
-        }
-        
-        .video-player.left-position {
-            left: 20px;
-            right: auto;
-            transform: none;
-        }
-        
-        .video-player.right-position {
-            left: auto;
-            right: 20px;
-            transform: none;
+        /* Desktop mini video player styles */
+        @media (min-width: 768px) {
+            .video-player {
+                width: 300px;
+                height: 169px;
+                left: 20px;
+                top: 80px;
+                transform: none;
+                max-width: none;
+                aspect-ratio: auto;
+            }
+            
+            .video-player.mini {
+                width: 250px;
+                height: 140px;
+            }
+            
+            .video-player.mini .video-player-header {
+                padding: 5px;
+                font-size: 12px;
+            }
+            
+            .video-player.mini .video-player-close {
+                width: 20px;
+                height: 20px;
+                font-size: 10px;
+            }
         }
         
         .video-player-container {
@@ -162,7 +162,6 @@
             z-index: 20;
             cursor: move;
             touch-action: none;
-            transition: opacity 0.3s ease;
         }
         
         .video-player-title {
@@ -192,7 +191,6 @@
             flex-shrink: 0;
             z-index: 21;
             position: relative;
-            opacity: 1 !important;
         }
         
         .video-player-loading {
@@ -217,26 +215,12 @@
             animation: spin 1s ease-in-out infinite;
         }
         
-        .video-player-refresh {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: var(--primary);
-            color: white;
-            padding: 10px 20px;
-            border-radius: 5px;
-            display: none;
-            cursor: pointer;
-            z-index: 15;
-            border: none;
-        }
-        
         @keyframes spin {
             to { transform: rotate(360deg); }
         }
         
-        .menu-btn {
+        /* Upload Button styles */
+        .upload-btn {
             position: fixed;
             bottom: 20px;
             right: 20px;
@@ -255,87 +239,8 @@
             transition: all 0.3s;
         }
         
-        .menu-btn:hover {
+        .upload-btn:hover {
             transform: scale(1.1);
-        }
-        
-        .menu-badge {
-            position: absolute;
-            top: -5px;
-            right: -5px;
-            background: var(--light);
-            color: var(--primary);
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 12px;
-            font-weight: bold;
-        }
-        
-        .menu-popup {
-            position: fixed;
-            bottom: 80px;
-            right: 20px;
-            width: 200px;
-            max-width: 90%;
-            background: var(--gray);
-            border-radius: 8px;
-            padding: 10px 0;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
-            border: 1px solid var(--primary);
-            z-index: 450;
-            display: none;
-        }
-        
-        .menu-popup.show {
-            display: block;
-            animation: fadeIn 0.3s;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .menu-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-            padding: 0 15px 5px;
-            border-bottom: 1px solid #333;
-        }
-        
-        .menu-title {
-            font-weight: bold;
-            color: var(--primary);
-        }
-        
-        .menu-close {
-            color: var(--text-light);
-            cursor: pointer;
-        }
-        
-        .menu-item {
-            padding: 10px 15px;
-            font-size: 14px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .menu-item:hover {
-            background-color: rgba(255, 255, 255, 0.1);
-            color: var(--primary);
-        }
-        
-        .menu-item i {
-            width: 20px;
-            text-align: center;
         }
         
         .modal-overlay {
@@ -831,6 +736,23 @@
             margin-left: 5px;
         }
         
+        .copy-btn:hover {
+            color: var(--secondary);
+        }
+        
+        .click-count {
+            color: var(--primary);
+            font-size: 12px;
+            margin-right: 5px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .click-count i {
+            margin-right: 3px;
+            font-size: 10px;
+        }
+        
         .premium-badge {
             background: linear-gradient(90deg, #FFD700, #FFA500, #FFD700);
             background-size: 200% 100%;
@@ -958,72 +880,6 @@
             100% { opacity: 0; }
         }
         
-        /* Upload button styles */
-        .upload-btn {
-            position: fixed;
-            bottom: 80px;
-            right: 80px;
-            width: 50px;
-            height: 50px;
-            background: var(--primary);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            cursor: pointer;
-            z-index: 400;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
-            transition: all 0.3s;
-            transform: translateY(20px);
-            opacity: 0;
-            pointer-events: none;
-        }
-        
-        .upload-btn.visible {
-            transform: translateY(0);
-            opacity: 1;
-            pointer-events: auto;
-        }
-        
-        .upload-btn:hover {
-            transform: translateY(0) scale(1.1);
-        }
-        
-        /* Telegram button styles */
-        .telegram-btn {
-            position: fixed;
-            bottom: 80px;
-            right: 140px;
-            width: 50px;
-            height: 50px;
-            background: #0088cc;
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            cursor: pointer;
-            z-index: 400;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
-            transition: all 0.3s;
-            transform: translateY(20px);
-            opacity: 0;
-            pointer-events: none;
-        }
-        
-        .telegram-btn.visible {
-            transform: translateY(0);
-            opacity: 1;
-            pointer-events: auto;
-        }
-        
-        .telegram-btn:hover {
-            transform: translateY(0) scale(1.1);
-        }
-        
         /* Upload modal styles */
         .upload-modal {
             max-width: 500px;
@@ -1092,6 +948,48 @@
             background: #444;
         }
         
+        /* Settings dropdown styles - Updated to center the popup */
+        .settings-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .settings-menu {
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--gray);
+            border: 1px solid var(--primary);
+            border-radius: 5px;
+            min-width: 200px;
+            z-index: 100;
+            display: none;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+        
+        .settings-menu.show {
+            display: block;
+        }
+        
+        .settings-item {
+            padding: 10px 15px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+        }
+        
+        .settings-item:hover {
+            background: rgba(255,255,255,0.1);
+        }
+        
+        .settings-item i {
+            width: 20px;
+            text-align: center;
+        }
+        
         @media (min-width: 480px) {
             .search-box {
                 height: 44px;
@@ -1136,10 +1034,6 @@
                 padding: 0 15px;
             }
             
-            .menu-popup {
-                width: 220px;
-            }
-            
             .title-bar {
                 max-width: 200px;
             }
@@ -1176,7 +1070,7 @@
         <button id="retryConnection">Try Again</button>
     </div>
 
-    <div class="video-player top-position" id="videoPlayer">
+    <div class="video-player" id="videoPlayer">
         <div class="video-player-container" id="videoPlayerContainer">
             <div class="video-player-header" id="videoPlayerHeader">
                 <div class="video-player-title" id="videoPlayerTitle"></div>
@@ -1187,9 +1081,6 @@
             <div class="video-player-loading" id="videoPlayerLoading">
                 <div class="video-player-spinner"></div>
             </div>
-            <button class="video-player-refresh" id="videoPlayerRefresh">
-                <i class="fas fa-sync-alt"></i> Refresh
-            </button>
             <iframe id="videoPlayerIframe" frameborder="0" allowfullscreen></iframe>
         </div>
     </div>
@@ -1197,42 +1088,6 @@
     <!-- Upload Button -->
     <div class="upload-btn" id="uploadBtn">
         <i class="fas fa-cloud-arrow-up"></i>
-    </div>
-    
-    <!-- Telegram Button -->
-    <div class="telegram-btn" id="telegramBtn">
-        <i class="fab fa-telegram"></i>
-    </div>
-    
-    <!-- Menu Button -->
-    <div class="menu-btn" id="menuBtn">
-        <i class="fas fa-envelope"></i>
-        <div class="menu-badge">1</div>
-    </div>
-    
-    <div class="menu-popup" id="menuPopup">
-        <div class="menu-header">
-            <div class="menu-title">Menu</div>
-            <div class="menu-close" id="menuClose">
-                <i class="fas fa-times"></i>
-            </div>
-        </div>
-        <div class="menu-item" id="privacyPolicyBtn">
-            <i class="fas fa-user-shield"></i>
-            <span>Privacy Policy</span>
-        </div>
-        <div class="menu-item" id="disclaimerBtn">
-            <i class="fas fa-exclamation-triangle"></i>
-            <span>Disclaimer</span>
-        </div>
-        <div class="menu-item" id="termsBtn">
-            <i class="fas fa-file-contract"></i>
-            <span>Terms & Conditions</span>
-        </div>
-        <div class="menu-item" id="notificationBtn">
-            <i class="fas fa-envelope"></i>
-            <span>Notifications</span>
-        </div>
     </div>
     
     <!-- Upload Modal -->
@@ -1265,7 +1120,7 @@
                             <option value="album">Album</option>
                             <option value="movie">Movie</option>
                             <option value="comedy">Comedy</option>
-                            <option value="reels">Reels</option>
+                            <option value="studio">Studio version</option>
                         </select>
                     </div>
                     <button type="submit" class="submit-btn">Upload Video</button>
@@ -1385,6 +1240,31 @@
         </div>
     </div>
     
+    <div class="modal-overlay" id="aboutModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">About Us</div>
+                <div class="modal-close" id="aboutClose">
+                    <i class="fas fa-times"></i>
+                </div>
+            </div>
+            <div class="modal-body">
+                <h3>Santali Premium</h3>
+                <p>Santali Premium is a platform dedicated to bringing the best Santali entertainment content to our community. Our mission is to preserve and promote Santali culture through music, movies, and other forms of entertainment.</p>
+                
+                <h3>Our Vision</h3>
+                <p>To create a vibrant digital space where Santali artists and creators can showcase their talent and connect with audiences worldwide.</p>
+                
+                <h3>Contact Us</h3>
+                <p>If you have any questions or suggestions, please feel free to reach out to us:</p>
+                <ul>
+                    <li>Email: info@santalipremium.com</li>
+                    <li>WhatsApp: +91 1234567890</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
     <div class="modal-overlay" id="shareModal">
         <div class="modal-content share-modal">
             <div class="modal-header">
@@ -1396,12 +1276,6 @@
             <div class="modal-body">
                 <p>Share this content with your friends:</p>
                 <div class="share-options">
-                    <div class="share-option" id="shareTelegram">
-                        <div class="share-icon telegram">
-                            <i class="fab fa-telegram"></i>
-                        </div>
-                        <div class="share-label">Telegram</div>
-                    </div>
                     <div class="share-option" id="shareWhatsApp">
                         <div class="share-icon whatsapp">
                             <i class="fab fa-whatsapp"></i>
@@ -1443,8 +1317,28 @@
                     <i class="fas fa-arrow-left"></i>
                 </div>
                 <div class="title-bar">
-                    <i class="fa-solid fa-cloud-arrow-up" id="uploadButton"></i>
-                    <i class="fa-solid fa-share" id="shareButton"></i>
+                    <div class="settings-dropdown">
+                        <i class="fa-solid fa-gear" id="gearButton"></i>
+                        <div class="settings-menu" id="settingsMenu">
+                            <div class="settings-item" id="privacyBtn">
+                                <i class="fas fa-shield-alt"></i>
+                                <span>Privacy Policy</span>
+                            </div>
+                            <div class="settings-item" id="disclaimerBtn">
+                                <i class="fas fa-exclamation-circle"></i>
+                                <span>Disclaimer</span>
+                            </div>
+                            <div class="settings-item" id="termsBtn">
+                                <i class="fas fa-file-contract"></i>
+                                <span>Terms & Conditions</span>
+                            </div>
+                            <div class="settings-item" id="aboutBtn">
+                                <i class="fas fa-info-circle"></i>
+                                <span>About Us</span>
+                            </div>
+                        </div>
+                    </div>
+                    <i class="fa-solid fa-bell" id="bellButton"></i>
                     <i class="fas fa-sync-alt refresh-btn" id="refreshButton"></i>
                 </div>
                 <div class="search-box" id="searchBox">
@@ -1473,9 +1367,9 @@
                 <i class="fas fa-laugh-squint"></i>
                 <span>Comedy</span>
             </div>
-            <div class="category-tab" data-category="reels" aria-label="Reels">
-                <i class="fab fa-instagram"></i>
-                <span>Reels</span>
+            <div class="category-tab" data-category="studio" aria-label="Studio">
+                <i class="fa-solid fa-microphone-lines"></i>
+                <span>Studio version</span>
             </div>
         </div>
         
@@ -1521,31 +1415,24 @@
         const videoPlayerTitle = document.getElementById('videoPlayerTitle');
         const videoPlayerClose = document.getElementById('videoPlayerClose');
         const videoPlayerLoading = document.getElementById('videoPlayerLoading');
-        const videoPlayerRefresh = document.getElementById('videoPlayerRefresh');
         const videoPlayerIframe = document.getElementById('videoPlayerIframe');
         const noInternet = document.getElementById('noInternet');
         const retryConnection = document.getElementById('retryConnection');
         const videosSection = document.getElementById('videosSection');
         const categories = document.getElementById('categories');
         const categoryTabs = document.querySelectorAll('.category-tab');
-        const menuBtn = document.getElementById('menuBtn');
-        const menuPopup = document.getElementById('menuPopup');
-        const menuClose = document.getElementById('menuClose');
-        const privacyPolicyBtn = document.getElementById('privacyPolicyBtn');
-        const disclaimerBtn = document.getElementById('disclaimerBtn');
-        const termsBtn = document.getElementById('termsBtn');
-        const notificationBtn = document.getElementById('notificationBtn');
         const privacyModal = document.getElementById('privacyModal');
         const disclaimerModal = document.getElementById('disclaimerModal');
         const termsModal = document.getElementById('termsModal');
         const notificationModal = document.getElementById('notificationModal');
+        const aboutModal = document.getElementById('aboutModal');
         const shareModal = document.getElementById('shareModal');
         const privacyClose = document.getElementById('privacyClose');
         const disclaimerClose = document.getElementById('disclaimerClose');
         const termsClose = document.getElementById('termsClose');
         const notificationClose = document.getElementById('notificationClose');
+        const aboutClose = document.getElementById('aboutClose');
         const shareClose = document.getElementById('shareClose');
-        const shareTelegram = document.getElementById('shareTelegram');
         const shareWhatsApp = document.getElementById('shareWhatsApp');
         const shareFacebook = document.getElementById('shareFacebook');
         const shareTwitter = document.getElementById('shareTwitter');
@@ -1562,9 +1449,13 @@
         const videoDescription = document.getElementById('videoDescription');
         const videoCategory = document.getElementById('videoCategory');
         const detectBtn = document.getElementById('detectBtn');
-        const telegramBtn = document.getElementById('telegramBtn');
-        const uploadButton = document.getElementById('uploadButton');
-        const shareButton = document.getElementById('shareButton');
+        const gearButton = document.getElementById('gearButton');
+        const settingsMenu = document.getElementById('settingsMenu');
+        const privacyBtn = document.getElementById('privacyBtn');
+        const disclaimerBtn = document.getElementById('disclaimerBtn');
+        const termsBtn = document.getElementById('termsBtn');
+        const aboutBtn = document.getElementById('aboutBtn');
+        const bellButton = document.getElementById('bellButton');
 
         // Global variables
         let videos = [];
@@ -1576,19 +1467,9 @@
         let playerStartY = 0;
         let playerOffsetX = 0;
         let playerOffsetY = 0;
-        let playerDirection = 'down';
-        let playerPosition = 'top';
-        let hideControlsTimeout = null;
-        let isMouseOverPlayer = false;
-        let controlsVisible = true;
-        let touchStartTime = 0;
-        let lastTapTime = 0;
-        let autoScrollInterval = null;
         let currentLinkIndex = 0;
-        let buttonsVisible = false;
         const linksToRotate = [
             "https://whatsapp.com/channel/0029Va9EkVfLikgDuskIqr3P",
-            "https://t.me/santali_premium",
             "https://www.youtube.com/@santalipremium"
         ];
 
@@ -1672,49 +1553,13 @@
 
             // Video player controls
             videoPlayerClose.addEventListener('click', closeVideoPlayer);
-            videoPlayerRefresh.addEventListener('click', () => {
-                if (currentPlayingVideo) {
-                    videoPlayerLoading.style.display = 'flex';
-                    videoPlayerRefresh.style.display = 'none';
-                    videoPlayerIframe.src = videoPlayerIframe.src;
-                }
-            });
 
-            // Menu and modals
-            menuBtn.addEventListener('click', toggleMenuPopup);
-            menuClose.addEventListener('click', toggleMenuPopup);
-            
-            document.addEventListener('click', (e) => {
-                if (!menuPopup.contains(e.target) && e.target !== menuBtn && 
-                    !menuBtn.contains(e.target)) {
-                    menuPopup.classList.remove('show');
-                }
-            });
-
-            privacyPolicyBtn.addEventListener('click', () => {
-                toggleMenuPopup();
-                privacyModal.classList.add('show');
-            });
-            
-            disclaimerBtn.addEventListener('click', () => {
-                toggleMenuPopup();
-                disclaimerModal.classList.add('show');
-            });
-            
-            termsBtn.addEventListener('click', () => {
-                toggleMenuPopup();
-                termsModal.classList.add('show');
-            });
-            
-            notificationBtn.addEventListener('click', () => {
-                toggleMenuPopup();
-                notificationModal.classList.add('show');
-            });
-
+            // Modal close buttons
             privacyClose.addEventListener('click', () => privacyModal.classList.remove('show'));
             disclaimerClose.addEventListener('click', () => disclaimerModal.classList.remove('show'));
             termsClose.addEventListener('click', () => termsModal.classList.remove('show'));
             notificationClose.addEventListener('click', () => notificationModal.classList.remove('show'));
+            aboutClose.addEventListener('click', () => aboutModal.classList.remove('show'));
             shareClose.addEventListener('click', () => shareModal.classList.remove('show'));
             
             document.addEventListener('click', (e) => {
@@ -1725,10 +1570,6 @@
 
             // Upload functionality
             uploadBtn.addEventListener('click', () => {
-                uploadModal.classList.add('show');
-            });
-            
-            uploadButton.addEventListener('click', () => {
                 uploadModal.classList.add('show');
             });
             
@@ -1747,21 +1588,51 @@
                 uploadVideo();
             });
 
-            // Telegram button functionality
-            telegramBtn.addEventListener('click', () => {
-                window.open('https://t.me/santali_premium', '_blank');
+            // Settings menu functionality
+            gearButton.addEventListener('click', (e) => {
+                e.stopPropagation();
+                settingsMenu.classList.toggle('show');
+            });
+            
+            // Close settings menu when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!e.target.closest('.settings-dropdown')) {
+                    settingsMenu.classList.remove('show');
+                }
+            });
+            
+            // Settings menu items
+            privacyBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                settingsMenu.classList.remove('show');
+                privacyModal.classList.add('show');
+            });
+            
+            disclaimerBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                settingsMenu.classList.remove('show');
+                disclaimerModal.classList.add('show');
+            });
+            
+            termsBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                settingsMenu.classList.remove('show');
+                termsModal.classList.add('show');
+            });
+            
+            aboutBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                settingsMenu.classList.remove('show');
+                aboutModal.classList.add('show');
             });
 
-            // Share button functionality
-            shareButton.addEventListener('click', () => {
-                shareModal.classList.add('show');
+            // Notification button
+            bellButton.addEventListener('click', (e) => {
+                e.stopPropagation();
+                notificationModal.classList.add('show');
             });
-            
+
             // Sharing functionality
-            shareTelegram.addEventListener('click', () => {
-                shareContent('telegram');
-            });
-            
             shareWhatsApp.addEventListener('click', () => {
                 shareContent('whatsapp');
             });
@@ -1780,47 +1651,8 @@
                 shareModal.classList.remove('show');
             });
 
-            // Video player controls visibility
-            videoPlayer.addEventListener('mouseenter', () => {
-                isMouseOverPlayer = true;
-                showPlayerControls();
-            });
-
-            videoPlayer.addEventListener('mouseleave', () => {
-                isMouseOverPlayer = false;
-                if (!isDraggingPlayer) {
-                    startHideControlsTimer();
-                }
-            });
-
-            // Hide controls when video starts playing
-            videoPlayer.addEventListener('mousemove', () => {
-                if (controlsVisible) {
-                    showPlayerControls();
-                    startHideControlsTimer();
-                }
-            });
-
-            // Touch to show/hide controls
-            videoPlayerContainer.addEventListener('click', (e) => {
-                if (e.target === videoPlayerContainer || e.target === videoPlayerIframe) {
-                    togglePlayerControls();
-                }
-            });
-
-            // Double tap to toggle fullscreen
-            videoPlayerContainer.addEventListener('touchstart', (e) => {
-                const currentTime = new Date().getTime();
-                const tapLength = currentTime - lastTapTime;
-                
-                if (tapLength < 300 && tapLength > 0) {
-                    // Double tap detected
-                    e.preventDefault();
-                    toggleFullscreen();
-                }
-                
-                lastTapTime = currentTime;
-            });
+            // Video player drag functionality for desktop
+            setupPlayerDrag();
 
             // Refresh button functionality
             refreshButton.addEventListener('click', () => {
@@ -1841,23 +1673,87 @@
             });
         }
 
-        // Toggle menu popup and buttons
-        function toggleMenuPopup() {
-            menuPopup.classList.toggle('show');
-            toggleButtons();
+        // Setup video player drag functionality
+        function setupPlayerDrag() {
+            const playerHeader = videoPlayerHeader;
+            const playerTitle = videoPlayerTitle;
+            const playerClose = videoPlayerClose;
+            
+            if (!playerHeader || !playerTitle || !playerClose) return;
+            
+            // Mouse events for desktop
+            playerHeader.addEventListener('mousedown', startDrag);
+            playerTitle.addEventListener('mousedown', startDrag);
+            
+            // Touch events for mobile
+            playerHeader.addEventListener('touchstart', startDrag, { passive: false });
+            playerTitle.addEventListener('touchstart', startDrag, { passive: false });
+            
+            // Prevent close button from triggering drag
+            playerClose.addEventListener('mousedown', (e) => {
+                e.stopPropagation();
+            });
+            playerClose.addEventListener('touchstart', (e) => {
+                e.stopPropagation();
+            });
+            
+            // Document-wide event listeners
+            document.addEventListener('mousemove', drag);
+            document.addEventListener('mouseup', endDrag);
+            document.addEventListener('touchmove', drag, { passive: false });
+            document.addEventListener('touchend', endDrag);
         }
 
-        // Toggle buttons visibility with animation
-        function toggleButtons() {
-            buttonsVisible = !buttonsVisible;
+        function startDrag(e) {
+            e.preventDefault();
+            e.stopPropagation();
             
-            if (buttonsVisible) {
-                uploadBtn.classList.add('visible');
-                telegramBtn.classList.add('visible');
-            } else {
-                uploadBtn.classList.remove('visible');
-                telegramBtn.classList.remove('visible');
-            }
+            isDraggingPlayer = true;
+            
+            // Get initial position
+            const clientX = e.clientX || e.touches[0].clientX;
+            const clientY = e.clientY || e.touches[0].clientY;
+            
+            playerStartX = clientX;
+            playerStartY = clientY;
+            
+            // Get current player position
+            const rect = videoPlayer.getBoundingClientRect();
+            playerOffsetX = playerStartX - rect.left;
+            playerOffsetY = playerStartY - rect.top;
+            
+            videoPlayer.style.transition = 'none';
+        }
+
+        function drag(e) {
+            if (!isDraggingPlayer) return;
+            
+            e.preventDefault();
+            e.stopPropagation();
+            
+            const clientX = e.clientX || e.touches[0].clientX;
+            const clientY = e.clientY || e.touches[0].clientY;
+            
+            let newX = clientX - playerOffsetX;
+            let newY = clientY - playerOffsetY;
+            
+            // Constrain to viewport
+            const playerWidth = videoPlayer.offsetWidth;
+            const playerHeight = videoPlayer.offsetHeight;
+            
+            newX = Math.max(0, Math.min(newX, window.innerWidth - playerWidth));
+            newY = Math.max(0, Math.min(newY, window.innerHeight - playerHeight));
+            
+            videoPlayer.style.left = `${newX}px`;
+            videoPlayer.style.top = `${newY}px`;
+            videoPlayer.style.transform = 'none';
+        }
+
+        function endDrag() {
+            if (!isDraggingPlayer) return;
+            
+            isDraggingPlayer = false;
+            videoPlayer.style.transition = 'all 0.3s ease';
         }
 
         // Upload video functions
@@ -1932,7 +1828,8 @@
                 isPremium: true,
                 enabled: false, // Videos are disabled by default
                 createdAt: firebase.database.ServerValue.TIMESTAMP,
-                views: 0
+                views: 0,
+                clicks: 0 // Initialize click count
             };
             
             // Save to Firebase
@@ -1973,7 +1870,8 @@
                                     labels: videoData.labels || [],
                                     isPremium: videoData.isPremium !== undefined ? videoData.isPremium : true,
                                     creator: videoData.creator || "Unknown Creator",
-                                    enabled: videoData.enabled || false
+                                    enabled: videoData.enabled || false,
+                                    clicks: videoData.clicks || 0 // Ensure clicks exists
                                 });
                             }
                         });
@@ -2011,58 +1909,6 @@
             return array;
         }
 
-        // Video player control visibility functions
-        function showPlayerControls() {
-            clearTimeout(hideControlsTimeout);
-            const header = videoPlayer.querySelector('.video-player-header');
-            
-            if (header) {
-                header.style.opacity = '1';
-            }
-            
-            controlsVisible = true;
-        }
-
-        function hidePlayerControls() {
-            if (isDraggingPlayer) return;
-            
-            const header = videoPlayer.querySelector('.video-player-header');
-            
-            if (header) {
-                header.style.opacity = '0';
-            }
-            
-            controlsVisible = false;
-        }
-
-        function togglePlayerControls() {
-            if (controlsVisible) {
-                hidePlayerControls();
-            } else {
-                showPlayerControls();
-                startHideControlsTimer();
-            }
-        }
-
-        function startHideControlsTimer() {
-            clearTimeout(hideControlsTimeout);
-            hideControlsTimeout = setTimeout(() => {
-                if (!isMouseOverPlayer && !isDraggingPlayer) {
-                    hidePlayerControls();
-                }
-            }, 3000); // Hide after 3 seconds of inactivity
-        }
-
-        function toggleFullscreen() {
-            if (!document.fullscreenElement) {
-                videoPlayerContainer.requestFullscreen().catch(err => {
-                    console.error(`Error attempting to enable fullscreen: ${err.message}`);
-                });
-            } else {
-                document.exitFullscreen();
-            }
-        }
-
         // Video player functions
         function showVideoPlayer(video) {
             if (!video || !video.url) {
@@ -2085,28 +1931,26 @@
             videoPlayerIframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&playsinline=1&enablejsapi=1&rel=0`;
             
             // Show the player
-            videoPlayer.className = 'video-player top-position';
             videoPlayer.style.display = 'block';
-            playerPosition = 'top';
+            
+            // For desktop, make it a mini player
+            if (window.innerWidth >= 768) {
+                videoPlayer.classList.add('mini');
+            }
             
             // Show loading state
             videoPlayerLoading.style.display = 'flex';
-            videoPlayerRefresh.style.display = 'none';
             
             // Setup event listeners for the iframe
             videoPlayerIframe.onload = () => {
                 videoPlayerLoading.style.display = 'none';
-                videoPlayerRefresh.style.display = 'none';
-                showPlayerControls();
-                startHideControlsTimer();
             };
             
             videoPlayerIframe.onerror = () => {
                 videoPlayerLoading.style.display = 'none';
-                videoPlayerRefresh.style.display = 'block';
             };
             
-            setupPlayerDrag();
+            // Track only the play, not the click (since we removed the trackVideoClick call here)
             trackVideoPlay(video);
         }
 
@@ -2114,178 +1958,6 @@
             videoPlayer.style.display = 'none';
             videoPlayerIframe.src = '';
             currentPlayingVideo = null;
-            clearTimeout(hideControlsTimeout);
-        }
-
-        // Video player drag functionality
-        function setupPlayerDrag() {
-            const playerHeader = videoPlayerHeader;
-            const playerTitle = videoPlayerTitle;
-            const playerClose = videoPlayerClose;
-            
-            if (!playerHeader || !playerTitle || !playerClose) return;
-            
-            // Remove previous event listeners to avoid duplicates
-            playerHeader.removeEventListener('mousedown', startPlayerDrag);
-            playerTitle.removeEventListener('mousedown', startPlayerDrag);
-            playerClose.removeEventListener('mousedown', (e) => e.stopPropagation());
-            
-            // Add new event listeners
-            playerHeader.addEventListener('mousedown', startPlayerDrag);
-            playerTitle.addEventListener('mousedown', startPlayerDrag);
-            
-            // Prevent close button from triggering drag
-            playerClose.addEventListener('mousedown', (e) => {
-                e.stopPropagation();
-            });
-            
-            // Touch events
-            playerHeader.removeEventListener('touchstart', handleTouchStart);
-            playerTitle.removeEventListener('touchstart', handleTouchStart);
-            playerClose.removeEventListener('touchstart', (e) => e.stopPropagation());
-            
-            playerHeader.addEventListener('touchstart', handleTouchStart, { passive: false });
-            playerTitle.addEventListener('touchstart', handleTouchStart, { passive: false });
-            playerClose.addEventListener('touchstart', (e) => {
-                e.stopPropagation();
-            }, { passive: false });
-            
-            // Document-wide event listeners
-            document.addEventListener('mousemove', dragPlayer);
-            document.addEventListener('mouseup', endPlayerDrag);
-            document.addEventListener('touchmove', handleTouchMove, { passive: false });
-            document.addEventListener('touchend', endPlayerDrag);
-        }
-
-        function handleTouchStart(e) {
-            e.preventDefault();
-            touchStartTime = Date.now();
-            startPlayerDrag(e);
-        }
-
-        function handleTouchMove(e) {
-            if (Date.now() - touchStartTime > 100) {
-                dragPlayer(e);
-            }
-        }
-
-        function startPlayerDrag(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            
-            isDraggingPlayer = true;
-            showPlayerControls();
-            
-            const clientX = e.type === 'mousedown' ? e.clientX : e.touches[0].clientX;
-            const clientY = e.type === 'mousedown' ? e.clientY : e.touches[0].clientY;
-            
-            playerStartX = clientX;
-            playerStartY = clientY;
-            
-            const rect = videoPlayer.getBoundingClientRect();
-            playerOffsetX = playerStartX - rect.left;
-            playerOffsetY = playerStartY - rect.top;
-            
-            videoPlayer.classList.add('dragging');
-            videoPlayer.style.transition = 'none';
-            
-            if (playerPosition === 'top') {
-                playerDirection = 'down';
-            } else if (playerPosition === 'bottom') {
-                playerDirection = 'up';
-            }
-        }
-
-        function dragPlayer(e) {
-            if (!isDraggingPlayer) return;
-            
-            e.preventDefault();
-            e.stopPropagation();
-            
-            let clientX, clientY;
-            
-            if (e.type === 'mousemove') {
-                clientX = e.clientX;
-                clientY = e.clientY;
-            } else if (e.type === 'touchmove') {
-                clientX = e.touches[0].clientX;
-                clientY = e.touches[0].clientY;
-            }
-            
-            let newX = clientX - playerOffsetX;
-            let newY = clientY - playerOffsetY;
-            
-            const playerWidth = videoPlayer.offsetWidth;
-            const playerHeight = videoPlayer.offsetHeight;
-            
-            newX = Math.max(0, Math.min(newX, window.innerWidth - playerWidth));
-            newY = Math.max(0, Math.min(newY, window.innerHeight - playerHeight));
-            
-            videoPlayer.style.left = `${newX}px`;
-            videoPlayer.style.top = `${newY}px`;
-            videoPlayer.style.transform = 'none';
-            
-            if (clientY > playerStartY) {
-                playerDirection = 'down';
-            } else if (clientY < playerStartY) {
-                playerDirection = 'up';
-            }
-            
-            playerStartY = clientY;
-        }
-
-        function endPlayerDrag(e) {
-            if (!isDraggingPlayer) return;
-            
-            isDraggingPlayer = false;
-            videoPlayer.classList.remove('dragging');
-            videoPlayer.style.transition = 'all 0.3s ease';
-            
-            const rect = videoPlayer.getBoundingClientRect();
-            const centerX = rect.left + rect.width / 2;
-            const centerY = rect.top + rect.height / 2;
-            
-            if (centerX < window.innerWidth / 3) {
-                videoPlayer.classList.remove('right-position');
-                videoPlayer.classList.add('left-position');
-                videoPlayer.style.left = '20px';
-                videoPlayer.style.right = 'auto';
-                videoPlayer.style.transform = 'none';
-                playerPosition = 'left';
-            } else if (centerX > window.innerWidth * 2/3) {
-                videoPlayer.classList.remove('left-position');
-                videoPlayer.classList.add('right-position');
-                videoPlayer.style.left = 'auto';
-                videoPlayer.style.right = '20px';
-                videoPlayer.style.transform = 'none';
-                playerPosition = 'right';
-            } else {
-                videoPlayer.classList.remove('left-position', 'right-position');
-                videoPlayer.style.left = '50%';
-                videoPlayer.style.right = 'auto';
-                videoPlayer.style.transform = 'translateX(-50%)';
-                playerPosition = playerDirection === 'down' ? 'bottom' : 'top';
-            }
-            
-            if (playerDirection === 'down') {
-                videoPlayer.classList.remove('top-position');
-                videoPlayer.classList.add('bottom-position');
-                videoPlayer.style.top = 'auto';
-                videoPlayer.style.bottom = '20px';
-                videoPlayer.style.transform = playerPosition === 'left' || playerPosition === 'right' ? 'none' : 'translateX(-50%)';
-                playerPosition = 'bottom';
-            } else {
-                videoPlayer.classList.remove('bottom-position');
-                videoPlayer.classList.add('top-position');
-                videoPlayer.style.top = '20px';
-                videoPlayer.style.bottom = 'auto';
-                videoPlayer.style.transform = playerPosition === 'left' || playerPosition === 'right' ? 'none' : 'translateX(-50%)';
-                playerPosition = 'top';
-            }
-            
-            if (!isMouseOverPlayer) {
-                startHideControlsTimer();
-            }
         }
 
         // Video tracking and data management
@@ -2302,201 +1974,218 @@
             }
         }
 
+        // Track video clicks
+        function trackVideoClick(video) {
+            if (!video || !video.id) return;
+            
+            try {
+                const videoRef = database.ref(`videos/${video.id}/clicks`);
+                videoRef.transaction((currentClicks) => {
+                    return (currentClicks || 0) + 1;
+                });
+            } catch (error) {
+                console.error("Error tracking video click:", error);
+            }
+        }
+
         // Search and filtering functions
-function searchVideos() {
-    const query = searchInput.value.trim().toLowerCase();
-    if (query === '') {
-        filterVideosByCategory();
-        return;
-    }
+        function searchVideos() {
+            const query = searchInput.value.trim().toLowerCase();
+            if (query === '') {
+                filterVideosByCategory();
+                return;
+            }
 
-    const filteredVideos = videos.filter(video => 
-        video.enabled && (
-            video.title.toLowerCase().includes(query) ||
-            (video.description && video.description.toLowerCase().includes(query)) ||
-            (video.category && video.category.toLowerCase().includes(query)) ||
-            (video.labels && video.labels.some(label => label.toLowerCase().includes(query)))
-        )
-    );
+            const filteredVideos = videos.filter(video => 
+                video.enabled && (
+                    video.title.toLowerCase().includes(query) ||
+                    (video.description && video.description.toLowerCase().includes(query)) ||
+                    (video.category && video.category.toLowerCase().includes(query)) ||
+                    (video.labels && video.labels.some(label => label.toLowerCase().includes(query)))
+                )
+            );
 
-    displayVideos(filteredVideos);
-}
+            displayVideos(filteredVideos);
+        }
 
-function filterVideosByCategory() {
-    let filteredVideos = videos.filter(video => video.enabled);
+        function filterVideosByCategory() {
+            let filteredVideos = videos.filter(video => video.enabled);
 
-    if (currentCategory !== 'all') {
-        filteredVideos = filteredVideos.filter(video => video.category === currentCategory);
-    }
+            if (currentCategory !== 'all') {
+                filteredVideos = filteredVideos.filter(video => video.category === currentCategory);
+            }
 
-    displayVideos(filteredVideos);
-}
+            displayVideos(filteredVideos);
+        }
 
-// Display videos with shuffle
-function displayVideos(videosToDisplay) {
-    videosGrid.innerHTML = '';
+        // Display videos with shuffle
+        function displayVideos(videosToDisplay) {
+            videosGrid.innerHTML = '';
 
-    if (videosToDisplay.length === 0) {
-        videosGrid.innerHTML = `
-            <div class="empty-album" style="grid-column: 1 / -1;">
-                <i class="fas fa-video-slash"></i>
-                <p>No videos found in this category</p>
-            </div>
-        `;
-        return;
-    }
-
-    // Shuffle the videos array using Fisher-Yates algorithm
-    const shuffledVideos = shuffleArray([...videosToDisplay]);
-
-    shuffledVideos.forEach(video => {
-        const videoCard = document.createElement('div');
-        videoCard.className = `video-card ${video.enabled ? '' : 'disabled'}`;
-        videoCard.innerHTML = `
-            <div class="thumbnail">
-                <img src="https://img.youtube.com/vi/${getYouTubeId(video.url)}/hqdefault.jpg" alt="${video.title}">
-            </div>
-            <div class="video-info">
-                <div class="video-content">
-                    <div class="youtube-logo">
-                        <i class="fab fa-youtube"></i>
-                        <button class="copy-btn" data-url="${video.url}" title="Copy YouTube Link">
-                            <i class="fas fa-copy"></i>
-                        </button>
+            if (videosToDisplay.length === 0) {
+                videosGrid.innerHTML = `
+                    <div class="empty-album" style="grid-column: 1 / -1;">
+                        <i class="fas fa-video-slash"></i>
+                        <p>No videos found in this category</p>
                     </div>
-                    <div class="video-title">${video.title}</div>
-                    ${video.description ? `<div class="video-description">${video.description}</div>` : ''}
-                </div>
-                <div class="video-badges">
-                    ${video.isPremium ? '<span class="premium-badge"><i class="fas fa-crown"></i> Premium</span>' : ''}
-                    ${video.category ? `<span class="video-category">${video.category}</span>` : ''}
-                </div>
-            </div>
-            ${!video.enabled ? '<div class="disabled-overlay">Video Disabled</div>' : ''}
-        `;
+                `;
+                return;
+            }
 
-        if (video.enabled) {
-            videoCard.addEventListener('click', (e) => {
-                if (!e.target.classList.contains('copy-btn') && !e.target.closest('.copy-btn')) {
-                    showVideoPlayer(video);
+            // Shuffle the videos array using Fisher-Yates algorithm
+            const shuffledVideos = shuffleArray([...videosToDisplay]);
+
+            shuffledVideos.forEach(video => {
+                const videoCard = document.createElement('div');
+                videoCard.className = `video-card ${video.enabled ? '' : 'disabled'}`;
+                videoCard.innerHTML = `
+                    <div class="thumbnail">
+                        <img src="https://img.youtube.com/vi/${getYouTubeId(video.url)}/hqdefault.jpg" alt="${video.title}">
+                    </div>
+                    <div class="video-info">
+                        <div class="video-content">
+                            <div class="youtube-logo">
+                                <i class="fab fa-youtube"></i>
+                                <span class="click-count" title="Total clicks">
+                                    <i class="fas fa-mouse-pointer"></i> ${video.clicks || 0}
+                                </span>
+                                <button class="copy-btn" data-url="${video.url}" title="Copy YouTube Link">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                            <div class="video-title">${video.title}</div>
+                            ${video.description ? `<div class="video-description">${video.description}</div>` : ''}
+                        </div>
+                        <div class="video-badges">
+                            ${video.isPremium ? '<span class="premium-badge"><i class="fas fa-crown"></i> Premium</span>' : ''}
+                            ${video.category ? `<span class="video-category">${video.category}</span>` : ''}
+                        </div>
+                    </div>
+                    ${!video.enabled ? '<div class="disabled-overlay">Video Disabled</div>' : ''}
+                `;
+
+                if (video.enabled) {
+                    videoCard.addEventListener('click', (e) => {
+                        if (!e.target.classList.contains('copy-btn') && !e.target.closest('.copy-btn')) {
+                            // Track the click first
+                            trackVideoClick(video);
+                            // Then show the video player
+                            showVideoPlayer(video);
+                        }
+                    });
                 }
+
+                const copyButton = videoCard.querySelector('.copy-btn');
+                if (copyButton) {
+                    copyButton.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        copyToClipboard(video.url);
+                        showToast('Video link copied to clipboard!');
+                    });
+                }
+
+                videosGrid.appendChild(videoCard);
             });
         }
 
-        const copyButton = videoCard.querySelector('.copy-btn');
-        if (copyButton) {
-            copyButton.addEventListener('click', (e) => {
-                e.stopPropagation();
-                copyToClipboard(video.url);
-                showToast('Video link copied to clipboard!');
-            });
+        // Utility functions
+        function showLoadingSkeleton() {
+            videosGrid.innerHTML = '';
+            for (let i = 0; i < 8; i++) {
+                const skeletonCard = document.createElement('div');
+                skeletonCard.className = 'video-card';
+                skeletonCard.innerHTML = `
+                    <div class="thumbnail skeleton skeleton-thumbnail"></div>
+                    <div class="video-info">
+                        <div class="video-content">
+                            <div class="skeleton skeleton-title"></div>
+                            <div class="skeleton skeleton-description"></div>
+                            <div class="skeleton skeleton-description"></div>
+                        </div>
+                        <div class="video-badges">
+                            <div class="skeleton skeleton-meta"></div>
+                        </div>
+                    </div>
+                `;
+                videosGrid.appendChild(skeletonCard);
+            }
         }
 
-        videosGrid.appendChild(videoCard);
-    });
-}
+        function getYouTubeId(url) {
+            if (!url) return null;
+            const regex = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/;
+            const match = url.match(regex);
+            return match ? match[1] : null;
+        }
 
-// Utility functions
-function showLoadingSkeleton() {
-    videosGrid.innerHTML = '';
-    for (let i = 0; i < 8; i++) {
-        const skeletonCard = document.createElement('div');
-        skeletonCard.className = 'video-card';
-        skeletonCard.innerHTML = `
-            <div class="thumbnail skeleton skeleton-thumbnail"></div>
-            <div class="video-info">
-                <div class="video-content">
-                    <div class="skeleton skeleton-title"></div>
-                    <div class="skeleton skeleton-description"></div>
-                    <div class="skeleton skeleton-description"></div>
-                </div>
-                <div class="video-badges">
-                    <div class="skeleton skeleton-meta"></div>
-                </div>
-            </div>
-        `;
-        videosGrid.appendChild(skeletonCard);
-    }
-}
+        function copyToClipboard(text) {
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(text).catch(err => {
+                    console.error('Failed to copy:', err);
+                });
+            } else {
+                const textarea = document.createElement('textarea');
+                textarea.value = text;
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+            }
+        }
 
-function getYouTubeId(url) {
-    if (!url) return null;
-    const regex = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/;
-    const match = url.match(regex);
-    return match ? match[1] : null;
-}
+        function showToast(message) {
+            toast.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2000);
+        }
 
-function copyToClipboard(text) {
-    if (navigator.clipboard) {
-        navigator.clipboard.writeText(text).catch(err => {
-            console.error('Failed to copy:', err);
-        });
-    } else {
-        const textarea = document.createElement('textarea');
-        textarea.value = text;
-        document.body.appendChild(textarea);
-        textarea.select();
-        document.execCommand('copy');
-        document.body.removeChild(textarea);
-    }
-}
+        function activateSearch() {
+            searchBox.classList.add('active');
+            appLogo.classList.add('hidden');
+            backButton.classList.add('active');
+            searchInput.focus();
+            titleBar.style.display = 'none';
+        }
 
-function showToast(message) {
-    toast.textContent = message;
-    toast.classList.add('show');
-    setTimeout(() => {
-        toast.classList.remove('show');
-    }, 2000);
-}
+        function deactivateSearch() {
+            searchBox.classList.remove('active');
+            appLogo.classList.remove('hidden');
+            backButton.classList.remove('active');
+            searchInput.value = '';
+            titleBar.style.display = 'flex';
+        }
 
-function activateSearch() {
-    searchBox.classList.add('active');
-    appLogo.classList.add('hidden');
-    backButton.classList.add('active');
-    searchInput.focus();
-    titleBar.style.display = 'none';
-}
+        function shareContent(platform) {
+            const shareUrl = encodeURIComponent(linksToRotate[currentLinkIndex]);
+            const shareText = encodeURIComponent('Check out this awesome Santali Premium content!');
+            let url;
 
-function deactivateSearch() {
-    searchBox.classList.remove('active');
-    appLogo.classList.remove('hidden');
-    backButton.classList.remove('active');
-    searchInput.value = '';
-    titleBar.style.display = 'flex';
-}
+            switch (platform) {
+                case 'whatsapp':
+                    url = `https://wa.me/?text=${shareText}%20${shareUrl}`;
+                    break;
+                case 'facebook':
+                    url = `https://www.facebook.com/sharer/sharer.php?u=${shareUrl}`;
+                    break;
+                case 'twitter':
+                    url = `https://twitter.com/intent/tweet?url=${shareUrl}&text=${shareText}`;
+                    break;
+                default:
+                    return;
+            }
 
-function shareContent(platform) {
-    const shareUrl = encodeURIComponent(linksToRotate[currentLinkIndex]);
-    const shareText = encodeURIComponent('Check out this awesome Santali Premium content!');
-    let url;
+            window.open(url, '_blank');
+            shareModal.classList.remove('show');
+        }
 
-    switch (platform) {
-        case 'telegram':
-            url = `https://t.me/share/url?url=${shareUrl}&text=${shareText}`;
-            break;
-        case 'whatsapp':
-            url = `https://wa.me/?text=${shareText}%20${shareUrl}`;
-            break;
-        case 'facebook':
-            url = `https://www.facebook.com/sharer/sharer.php?u=${shareUrl}`;
-            break;
-        case 'twitter':
-            url = `https://twitter.com/intent/tweet?url=${shareUrl}&text=${shareText}`;
-            break;
-        default:
-            return;
-    }
+        function generateUniqueId() {
+            return '_' + Math.random().toString(36).substr(2, 9);
+        }
 
-    window.open(url, '_blank');
-    shareModal.classList.remove('show');
-}
-
-function generateUniqueId() {
-    return '_' + Math.random().toString(36).substr(2, 9);
-}
-
-// Initialize the app
-initApp();
+        // Initialize the app
+        initApp();
     </script>
 </body>
-</html>
+                                                                                               </html>
