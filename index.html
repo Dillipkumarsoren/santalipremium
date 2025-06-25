@@ -412,10 +412,12 @@
             transform: translateX(-10px);
         }
         
-        .logo i {
+        .logo img {
             margin-right: 10px;
-            color: var(--primary);
-            font-size: 24px;
+            height: 24px;
+            width: 24px;
+            border-radius: 50%;
+            object-fit: cover;
         }
         
         .search-container {
@@ -660,6 +662,20 @@
             height: 100%;
             object-fit: cover;
             transition: transform 0.3s;
+        }
+        
+        /* New duration badge style */
+        .duration-badge {
+            position: absolute;
+            bottom: 5px;
+            right: 5px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 3px 6px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 500;
+            z-index: 2;
         }
         
         .video-card:active .thumbnail img {
@@ -1138,29 +1154,10 @@
                 </div>
             </div>
             <div class="modal-body">
-                <h3>Information We Collect</h3>
-                <p>We collect information to provide better services to all our users. The information we collect includes:</p>
-                <ul>
-                    <li>Device information (model, operating system version, unique device identifiers)</li>
-                    <li>Log information (details of how you used our service, device event information)</li>
-                    <li>Location information (if you enable location services)</li>
-                </ul>
-                
-                <h3>How We Use Information</h3>
-                <p>We use the information we collect to:</p>
-                <ul>
-                    <li>Provide, maintain, and improve our services</li>
-                    <li>Develop new services</li>
-                    <li>Provide personalized content</li>
-                    <li>Measure performance and analyze usage</li>
-                </ul>
-                
-                <h3>Information Sharing</h3>
-                <p>We do not share personal information with companies, organizations, or individuals outside of our organization except in the following cases:</p>
-                <ul>
-                    <li>With your consent</li>
-                    <li>For legal reasons</li>
-                </ul>
+                <h1>Privacy Policy</h1>
+<a href="https://www.termsfeed.com/live/0204b386-784b-4101-b0c6-b6c868e77d76" target="_blank">
+  Privacy Policy
+</a>
             </div>
         </div>
     </div>
@@ -1174,17 +1171,10 @@
                 </div>
             </div>
             <div class="modal-body">
-                <h3>Content Disclaimer</h3>
-                <p>The content provided in this application is for informational and entertainment purposes only. We do not claim ownership of any video content displayed through YouTube's API.</p>
-                
-                <h3>Accuracy of Information</h3>
-                <p>While we strive to provide accurate information, we make no representations or warranties of any kind, express or implied, about the completeness, accuracy, reliability, suitability, or availability with respect to the content contained in the application.</p>
-                
-                <h3>Third-Party Content</h3>
-                <p>This application may contain links to third-party websites or services that are not owned or controlled by us. We have no control over, and assume no responsibility for, the content, privacy policies, or practices of any third-party websites or services.</p>
-                
-                <h3>Limitation of Liability</h3>
-                <p>In no event shall we be liable for any loss or damage including without limitation, indirect or consequential loss or damage, or any loss or damage whatsoever arising from loss of data or profits arising out of, or in connection with, the use of this application.</p>
+                <h1>Disclaimer</h1>
+<a href="https://www.termsfeed.com/live/73d4c114-22a5-43e5-a333-9f691c966318" target="_blank">
+  Disclaimer
+</a>
             </div>
         </div>
     </div>
@@ -1198,26 +1188,10 @@
                 </div>
             </div>
             <div class="modal-body">
-                <h3>Acceptance of Terms</h3>
-                <p>By accessing or using our application, you agree to be bound by these Terms. If you disagree with any part of the terms, then you may not access the application.</p>
-                
-                <h3>User Conduct</h3>
-                <p>You agree not to use the application to:</p>
-                <ul>
-                    <li>Violate any laws or regulations</li>
-                    <li>Infringe the intellectual property rights of others</li>
-                    <li>Distribute viruses or other harmful computer code</li>
-                    <li>Collect information about others without their consent</li>
-                </ul>
-                
-                <h3>Account Termination</h3>
-                <p>We may terminate or suspend access to our application immediately, without prior notice or liability, for any reason whatsoever, including without limitation if you breach the Terms.</p>
-                
-                <h3>Changes to Terms</h3>
-                <p>We reserve the right, at our sole discretion, to modify or replace these Terms at any time. We will provide notice of any changes by posting the new Terms on this page.</p>
-                
-                <h3>Governing Law</h3>
-                <p>These Terms shall be governed and construed in accordance with the laws of the country in which our company is registered, without regard to its conflict of law provisions.</p>
+                <h1>Terms and Conditions</h1>
+<a href="https://www.termsfeed.com/live/d3747ea2-6ba3-4820-bba2-1d9067254a38" target="_blank">
+  Terms and Conditions
+</a>        
             </div>
         </div>
     </div>
@@ -1231,7 +1205,8 @@
                 </div>
             </div>
             <div class="modal-body">
-                <h3>Important Notice</h3> Jahai ko ing aa santalipremium app re youTube video link doho sanapeya enkhan inga aa whatsApp number re link bhejai pe (+91 9438582096 ). Original content hui koma. first ale le nel aa apeya content R YouTube channel judi Genuine hui kowa , enkhan apeya video link nowa aap re jaga nam lagid daw ( approve ) nam aay.</p>
+                <h3>Important Notice</h3>
+                <p>Jahai ko nowa aap re YouTube video doho sana peya ing aa WhatsApp number re ( +91 9438582096 ) . Original content hui koma. first ale le nel aa apeya content R YouTube channel judi Genuine hui kowa , enkhan apeya video link nowa aap re jaga nam lagid daw ( approve ) nam aay.</p>
                 
                 <h3>Notification Settings</h3>
                 <p>You can manage your notification preferences in your device settings.</p>
@@ -1307,7 +1282,7 @@
     <div class="main-app" id="mainApp">
         <header class="header">
             <div class="logo" id="appLogo">
-                <i class="fa-solid fa-circle-play"></i>
+                <img src="https://firebasestorage.googleapis.com/v0/b/sorenstarmedia.appspot.com/o/20250621_155138.jpg?alt=media&token=YOUR_TOKEN_HERE" alt="Santali Premium Logo">
                 <span>Santali Premium</span>
             </div>
             
@@ -1395,6 +1370,9 @@
             appId: "1:84788314880:web:bc25c6977296ae1f15a9e5",
             measurementId: "G-6QS5NJCR8F"
         };
+
+        // YouTube API Key for duration detection
+        const YOUTUBE_API_KEY = "AIzaSyBX-w_IEotpmi9FLRvHTU5A0MYi8UByudU";
 
         const app = firebase.initializeApp(firebaseConfig);
         const database = firebase.database();
@@ -1773,7 +1751,7 @@
             videoTitle.value = "Loading video info...";
             videoDescription.value = "Loading video description...";
             
-            // Fetch video info from YouTube oEmbed API
+            // First fetch basic info from oEmbed
             fetch(`https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=${videoId}&format=json`)
                 .then(response => {
                     if (!response.ok) {
@@ -1786,11 +1764,21 @@
                     videoTitle.value = data.title;
                     videoDescription.value = data.title; // Using title as description since oEmbed doesn't provide description
                     
-                    // Auto-select a category based on some logic (random in this case)
-                    const categories = ['album', 'movie', 'comedy', 'reels'];
-                    const randomCategory = categories[Math.floor(Math.random() * categories.length)];
-                    videoCategory.value = randomCategory;
-                    
+                    // Now fetch duration using YouTube API
+                    return fetch(`https://www.googleapis.com/youtube/v3/videos?part=contentDetails&id=${videoId}&key=${YOUTUBE_API_KEY}`);
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('YouTube API response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.items && data.items.length > 0) {
+                        const duration = data.items[0].contentDetails.duration;
+                        const formattedDuration = formatYouTubeDuration(duration);
+                        videoDescription.value += `\n\nDuration: ${formattedDuration}`;
+                    }
                     showToast('Video info detected successfully');
                 })
                 .catch(error => {
@@ -1800,6 +1788,26 @@
                     videoDescription.value = `Santali Video ${videoId}`;
                     showToast('Using default title (YouTube API failed)');
                 });
+        }
+        
+        // Format YouTube duration (PT1H2M3S -> 1:02:03)
+        function formatYouTubeDuration(duration) {
+            const match = duration.match(/PT(\d+H)?(\d+M)?(\d+S)?/);
+            const hours = (match[1] ? parseInt(match[1]) : 0);
+            const minutes = (match[2] ? parseInt(match[2]) : 0);
+            const seconds = (match[3] ? parseInt(match[3]) : 0);
+            
+            let timeString = '';
+            if (hours > 0) {
+                timeString += hours + ':';
+                timeString += minutes.toString().padStart(2, '0') + ':';
+                timeString += seconds.toString().padStart(2, '0');
+            } else {
+                timeString += minutes + ':';
+                timeString += seconds.toString().padStart(2, '0');
+            }
+            
+            return timeString;
         }
         
         function uploadVideo() {
@@ -1828,7 +1836,8 @@
                 enabled: false, // Videos are disabled by default
                 createdAt: firebase.database.ServerValue.TIMESTAMP,
                 views: 0,
-                clicks: 0 // Initialize click count
+                clicks: 0, // Initialize click count
+                dailyClicks: {} // Initialize daily clicks object
             };
             
             // Save to Firebase
@@ -1870,7 +1879,8 @@
                                     isPremium: videoData.isPremium !== undefined ? videoData.isPremium : true,
                                     creator: videoData.creator || "Unknown Creator",
                                     enabled: videoData.enabled || false,
-                                    clicks: videoData.clicks || 0 // Ensure clicks exists
+                                    clicks: videoData.clicks || 0, // Ensure clicks exists
+                                    dailyClicks: videoData.dailyClicks || {} // Ensure dailyClicks exists
                                 });
                             }
                         });
@@ -1878,7 +1888,10 @@
                         // Reverse the array to show newest first (since Firebase returns ascending order)
                         videos.reverse();
                         
-                        filterVideosByCategory();
+                        // Now fetch durations for all videos
+                        fetchVideoDurations().then(() => {
+                            filterVideosByCategory();
+                        });
                     } else {
                         videosGrid.innerHTML = '<div style="grid-column: 1 / -1; text-align: center; padding: 20px;">No videos found</div>';
                     }
@@ -1889,6 +1902,49 @@
                 console.error("Error loading videos:", error);
                 loadingContainer.style.display = 'none';
                 videosGrid.innerHTML = '<div style="grid-column: 1 / -1; text-align: center; padding: 20px;">Error loading videos. Please try again.</div>';
+            }
+        }
+
+        // Fetch durations for all videos using YouTube API
+        async function fetchVideoDurations() {
+            // Group video IDs into batches of 50 (YouTube API limit)
+            const batchSize = 50;
+            const videoBatches = [];
+            
+            for (let i = 0; i < videos.length; i += batchSize) {
+                videoBatches.push(videos.slice(i, i + batchSize));
+            }
+            
+            // Process each batch
+            for (const batch of videoBatches) {
+                const videoIds = batch.map(video => getYouTubeId(video.url)).filter(id => id);
+                if (videoIds.length === 0) continue;
+                
+                try {
+                    const response = await fetch(`https://www.googleapis.com/youtube/v3/videos?part=contentDetails&id=${videoIds.join(',')}&key=${YOUTUBE_API_KEY}`);
+                    if (!response.ok) {
+                        console.error('YouTube API error:', response.status);
+                        continue;
+                    }
+                    
+                    const data = await response.json();
+                    if (data.items && data.items.length > 0) {
+                        // Map durations back to our videos
+                        data.items.forEach(item => {
+                            const videoId = item.id;
+                            const duration = item.contentDetails.duration;
+                            const formattedDuration = formatYouTubeDuration(duration);
+                            
+                            // Find the video in our array and add duration
+                            const video = videos.find(v => getYouTubeId(v.url) === videoId);
+                            if (video) {
+                                video.duration = formattedDuration;
+                            }
+                        });
+                    }
+                } catch (error) {
+                    console.error('Error fetching video durations:', error);
+                }
             }
         }
 
@@ -1973,14 +2029,32 @@
             }
         }
 
-        // Track video clicks
+        // Track video clicks with daily tracking
         function trackVideoClick(video) {
             if (!video || !video.id) return;
             
             try {
-                const videoRef = database.ref(`videos/${video.id}/clicks`);
-                videoRef.transaction((currentClicks) => {
-                    return (currentClicks || 0) + 1;
+                // Get current date in YYYY-MM-DD format
+                const today = new Date().toISOString().split('T')[0];
+                
+                // Update total clicks
+                const videoRef = database.ref(`videos/${video.id}`);
+                
+                // Run a transaction to update both total clicks and daily clicks
+                videoRef.transaction((currentVideo) => {
+                    if (currentVideo) {
+                        // Update total clicks
+                        currentVideo.clicks = (currentVideo.clicks || 0) + 1;
+                        
+                        // Initialize dailyClicks if it doesn't exist
+                        if (!currentVideo.dailyClicks) {
+                            currentVideo.dailyClicks = {};
+                        }
+                        
+                        // Update today's click count
+                        currentVideo.dailyClicks[today] = (currentVideo.dailyClicks[today] || 0) + 1;
+                    }
+                    return currentVideo;
                 });
             } catch (error) {
                 console.error("Error tracking video click:", error);
@@ -2037,9 +2111,15 @@
             shuffledVideos.forEach(video => {
                 const videoCard = document.createElement('div');
                 videoCard.className = `video-card ${video.enabled ? '' : 'disabled'}`;
+                
+                // Add duration badge if available
+                const durationBadge = video.duration ? 
+                    `<div class="duration-badge">${video.duration}</div>` : '';
+                
                 videoCard.innerHTML = `
                     <div class="thumbnail">
                         <img src="https://img.youtube.com/vi/${getYouTubeId(video.url)}/hqdefault.jpg" alt="${video.title}">
+                        ${durationBadge}
                     </div>
                     <div class="video-info">
                         <div class="video-content">
@@ -2187,4 +2267,4 @@
         initApp();
     </script>
 </body>
-                                                                                               </html>
+                            </html>
