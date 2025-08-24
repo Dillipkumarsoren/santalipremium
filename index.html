@@ -1,13 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+
+ 
+  
+  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Santali Premium</title>
-    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-database-compat.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    
+  <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-database-compat.js"></script>
+
+    
+    <!-- Preconnects first -->
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+<link rel="preconnect" href="https://maxcdn.bootstrapcdn.com" crossorigin>
+<link rel="preconnect" href="https://www.gstatic.com" crossorigin>
+
+<!-- Preload CSS -->
+<link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+
+<link rel="preload" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"></noscript>
+    
+    
     <style>
         :root {
             --primary: #FF0000;
@@ -964,7 +981,7 @@
             background: #444;
         }
         
-        /* Settings dropdown styles - Updated to center the popup */
+        /* Settings dropdown styles - Updated with professional close button */
         .settings-dropdown {
             position: relative;
             display: inline-block;
@@ -977,24 +994,63 @@
             transform: translate(-50%, -50%);
             background: var(--gray);
             border: 1px solid var(--primary);
-            border-radius: 5px;
-            min-width: 200px;
+            border-radius: 8px;
+            min-width: 250px;
             z-index: 100;
             display: none;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+            box-shadow: 0 2px 15px rgba(0,0,0,0.7);
+            padding: 15px;
         }
         
         .settings-menu.show {
             display: block;
         }
         
+        .settings-menu-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #333;
+        }
+        
+        .settings-menu-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: var(--primary);
+        }
+        
+        .settings-menu-close {
+            width: 24px;
+            height: 24px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            cursor: pointer;
+            border: none;
+            outline: none;
+            transition: all 0.2s;
+        }
+        
+        .settings-menu-close:hover {
+            transform: scale(1.1);
+            background: var(--secondary);
+        }
+        
         .settings-item {
-            padding: 10px 15px;
+            padding: 12px 15px;
             cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
             font-size: 14px;
+            border-radius: 5px;
+            transition: all 0.2s;
         }
         
         .settings-item:hover {
@@ -1004,6 +1060,7 @@
         .settings-item i {
             width: 20px;
             text-align: center;
+            color: var(--primary);
         }
         
         @media (min-width: 480px) {
@@ -1078,6 +1135,8 @@
         }
     </style>
 </head>
+  
+  
 <body>
     <div class="no-internet" id="noInternet">
         <i class="fas fa-wifi"></i>
@@ -1294,6 +1353,12 @@
                     <div class="settings-dropdown">
                         <i class="fa-solid fa-gear" id="gearButton"></i>
                         <div class="settings-menu" id="settingsMenu">
+                            <div class="settings-menu-header">
+                                <div class="settings-menu-title">Settings</div>
+                                <button class="settings-menu-close" id="settingsMenuClose">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
                             <div class="settings-item" id="privacyBtn">
                                 <i class="fas fa-shield-alt"></i>
                                 <span>Privacy Policy</span>
@@ -1360,6 +1425,9 @@
     <div class="toast" id="toast">Link copied to clipboard!</div>
 
     <script>
+      
+   
+      
         const firebaseConfig = {
             apiKey: "AIzaSyCGZnlhY4CpNbK5Jx9csh8xwLFssuMivR4",
             authDomain: "sorenstarmedia.firebaseapp.com",
@@ -1370,6 +1438,7 @@
             appId: "1:84788314880:web:bc25c6977296ae1f15a9e5",
             measurementId: "G-6QS5NJCR8F"
         };
+      
 
         // YouTube API Key for duration detection
         const YOUTUBE_API_KEY = "AIzaSyBX-w_IEotpmi9FLRvHTU5A0MYi8UByudU";
@@ -1428,6 +1497,7 @@
         const detectBtn = document.getElementById('detectBtn');
         const gearButton = document.getElementById('gearButton');
         const settingsMenu = document.getElementById('settingsMenu');
+        const settingsMenuClose = document.getElementById('settingsMenuClose');
         const privacyBtn = document.getElementById('privacyBtn');
         const disclaimerBtn = document.getElementById('disclaimerBtn');
         const termsBtn = document.getElementById('termsBtn');
@@ -1538,6 +1608,10 @@
             notificationClose.addEventListener('click', () => notificationModal.classList.remove('show'));
             aboutClose.addEventListener('click', () => aboutModal.classList.remove('show'));
             shareClose.addEventListener('click', () => shareModal.classList.remove('show'));
+            settingsMenuClose.addEventListener('click', (e) => {
+                e.stopPropagation();
+                settingsMenu.classList.remove('show');
+            });
             
             document.addEventListener('click', (e) => {
                 if (e.target.classList.contains('modal-overlay')) {
@@ -1823,6 +1897,17 @@
             const videoId = getYouTubeId(url);
             if (!videoId) {
                 showToast('Invalid YouTube URL');
+                return;
+            }
+            
+            // Check if video already exists
+            const videoExists = videos.some(video => {
+                const existingVideoId = getYouTubeId(video.url);
+                return existingVideoId === videoId;
+            });
+            
+            if (videoExists) {
+                showToast('This video URL already exists in our database');
                 return;
             }
             
@@ -2267,4 +2352,4 @@
         initApp();
     </script>
 </body>
-                            </html>
+</html>
