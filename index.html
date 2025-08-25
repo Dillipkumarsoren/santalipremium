@@ -1,37 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-50EKB4X0TM"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
 
-  gtag('config', 'G-50EKB4X0TM');
-</script>
-
-   
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Santali Premium</title>
     
-  <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-database-compat.js"></script>
-
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-database-compat.js"></script>
     
     <!-- Preconnects first -->
-<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
-<link rel="preconnect" href="https://maxcdn.bootstrapcdn.com" crossorigin>
-<link rel="preconnect" href="https://www.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="preconnect" href="https://maxcdn.bootstrapcdn.com" crossorigin>
+    <link rel="preconnect" href="https://www.gstatic.com" crossorigin>
 
-<!-- Preload CSS -->
-<link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+    <!-- Preload CSS -->
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
 
-<link rel="preload" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"></noscript>
-    
+    <link rel="preload" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"></noscript>
     
     <style>
         :root {
@@ -247,7 +235,7 @@
         /* Upload Button styles */
         .upload-btn {
             position: fixed;
-            bottom: 20px;
+            bottom: 80px;
             right: 20px;
             width: 50px;
             height: 50px;
@@ -266,6 +254,25 @@
         
         .upload-btn:hover {
             transform: scale(1.1);
+        }
+        
+        /* Ad container styles */
+        .ad-container {
+            position: fixed;
+            bottom: 20px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            z-index: 399;
+            padding: 0 10px;
+        }
+        
+        .ad-container iframe {
+            border: none;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
         }
         
         .modal-overlay {
@@ -500,6 +507,8 @@
             justify-content: center;
             cursor: pointer;
             flex-shrink: 0;
+            background: transparent;
+            border: none;
         }
         
         .search-icon i {
@@ -520,6 +529,8 @@
             justify-content: center;
             width: 0;
             overflow: hidden;
+            background: transparent;
+            border: none;
         }
         
         .back-btn.active {
@@ -548,6 +559,8 @@
             font-size: 20px;
             cursor: pointer;
             transition: transform 0.3s;
+            background: transparent;
+            border: none;
         }
         
         .refresh-btn.rotating {
@@ -590,6 +603,8 @@
             display: flex;
             align-items: center;
             gap: 5px;
+            background: transparent;
+            border: none;
         }
         
         .category-tab.active {
@@ -1059,6 +1074,11 @@
             font-size: 14px;
             border-radius: 5px;
             transition: all 0.2s;
+            background: transparent;
+            border: none;
+            color: var(--text-light);
+            width: 100%;
+            text-align: left;
         }
         
         .settings-item:hover {
@@ -1144,7 +1164,6 @@
     </style>
 </head>
   
-  
 <body>
     <div class="no-internet" id="noInternet">
         <i class="fas fa-wifi"></i>
@@ -1166,6 +1185,20 @@
             </div>
             <iframe id="videoPlayerIframe" frameborder="0" allowfullscreen></iframe>
         </div>
+    </div>
+    
+    <!-- Ad Container -->
+    <div class="ad-container" id="adContainer">
+        <script type="text/javascript">
+            atOptions = {
+                'key' : '081d5d97a50c77bbd649602131faf32a',
+                'format' : 'iframe',
+                'height' : 50,
+                'width' : 320,
+                'params' : {}
+            };
+        </script>
+        <script type="text/javascript" src="//www.highperformanceformat.com/081d5d97a50c77bbd649602131faf32a/invoke.js"></script>
     </div>
     
     <!-- Upload Button -->
@@ -1354,9 +1387,9 @@
             </div>
             
             <div class="search-container">
-                <div class="back-btn" id="backButton">
+                <button class="back-btn" id="backButton">
                     <i class="fas fa-arrow-left"></i>
-                </div>
+                </button>
                 <div class="title-bar">
                     <div class="settings-dropdown">
                         <i class="fa-solid fa-gear" id="gearButton"></i>
@@ -1367,57 +1400,59 @@
                                     <i class="fas fa-times"></i>
                                 </button>
                             </div>
-                            <div class="settings-item" id="privacyBtn">
+                            <button class="settings-item" id="privacyBtn">
                                 <i class="fas fa-shield-alt"></i>
                                 <span>Privacy Policy</span>
-                            </div>
-                            <div class="settings-item" id="disclaimerBtn">
+                            </button>
+                            <button class="settings-item" id="disclaimerBtn">
                                 <i class="fas fa-exclamation-circle"></i>
                                 <span>Disclaimer</span>
-                            </div>
-                            <div class="settings-item" id="termsBtn">
+                            </button>
+                            <button class="settings-item" id="termsBtn">
                                 <i class="fas fa-file-contract"></i>
                                 <span>Terms & Conditions</span>
-                            </div>
-                            <div class="settings-item" id="aboutBtn">
+                            </button>
+                            <button class="settings-item" id="aboutBtn">
                                 <i class="fas fa-info-circle"></i>
                                 <span>About Us</span>
-                            </div>
+                            </button>
                         </div>
                     </div>
                     <i class="fa-solid fa-bell" id="bellButton"></i>
-                    <i class="fas fa-sync-alt refresh-btn" id="refreshButton"></i>
+                    <button class="refresh-btn" id="refreshButton">
+                        <i class="fas fa-sync-alt"></i>
+                    </button>
                 </div>
                 <div class="search-box" id="searchBox">
                     <input type="text" class="search-input" id="searchInput" placeholder="Search videos...">
-                    <div class="search-icon" id="searchButton">
+                    <button class="search-icon" id="searchButton">
                         <i class="fas fa-search"></i>
-                    </div>
+                    </button>
                 </div>
             </div>
         </header>
         
         <div class="categories" id="categories">
-            <div class="category-tab active" data-category="all" aria-label="All videos">
+            <button class="category-tab active" data-category="all" aria-label="All videos">
                 <i class="fa fa-th-list"></i>
                 <span>All</span>
-            </div>
-            <div class="category-tab" data-category="album" aria-label="Albums">
+            </button>
+            <button class="category-tab" data-category="album" aria-label="Albums">
                 <i class="fa fa-play-circle"></i>
                 <span>Album</span>
-            </div>
-            <div class="category-tab" data-category="movie" aria-label="Movies">
+            </button>
+            <button class="category-tab" data-category="movie" aria-label="Movies">
                 <i class="fas fa-film"></i>
                 <span>Movie</span>
-            </div>
-            <div class="category-tab" data-category="comedy" aria-label="Comedy">
+            </button>
+            <button class="category-tab" data-category="comedy" aria-label="Comedy">
                 <i class="fas fa-laugh-squint"></i>
                 <span>Comedy</span>
-            </div>
-            <div class="category-tab" data-category="studio" aria-label="Studio">
+            </button>
+            <button class="category-tab" data-category="studio" aria-label="Studio">
                 <i class="fa-solid fa-microphone-lines"></i>
                 <span>Studio version</span>
-            </div>
+            </button>
         </div>
         
         <div class="content-section" id="videosSection">
@@ -1433,9 +1468,6 @@
     <div class="toast" id="toast">Link copied to clipboard!</div>
 
     <script>
-      
-   
-      
         const firebaseConfig = {
             apiKey: "AIzaSyCGZnlhY4CpNbK5Jx9csh8xwLFssuMivR4",
             authDomain: "sorenstarmedia.firebaseapp.com",
@@ -1446,7 +1478,6 @@
             appId: "1:84788314880:web:bc25c6977296ae1f15a9e5",
             measurementId: "G-6QS5NJCR8F"
         };
-      
 
         // YouTube API Key for duration detection
         const YOUTUBE_API_KEY = "AIzaSyBX-w_IEotpmi9FLRvHTU5A0MYi8UByudU";
@@ -1511,6 +1542,7 @@
         const termsBtn = document.getElementById('termsBtn');
         const aboutBtn = document.getElementById('aboutBtn');
         const bellButton = document.getElementById('bellButton');
+        const adContainer = document.getElementById('adContainer');
 
         // Global variables
         let videos = [];
@@ -2128,7 +2160,7 @@
             
             try {
                 // Get current date in YYYY-MM-DD format
-                const today = new Date().toISOString().split('T')[0];
+                const today = new Date().toISO().split('T')[0];
                 
                 // Update total clicks
                 const videoRef = database.ref(`videos/${video.id}`);
