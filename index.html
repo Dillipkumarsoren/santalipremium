@@ -249,28 +249,118 @@
             to { transform: rotate(360deg); }
         }
         
-        /* Upload Button styles - Moved higher up */
-        .upload-btn {
+        /* Side Menu Styles */
+        .side-menu {
             position: fixed;
-            bottom: 100px; /* Changed from 20px to 100px to move it higher */
-            right: 20px;
-            width: 50px;
-            height: 50px;
-            background: var(--primary);
-            color: white;
-            border-radius: 50%;
+            top: 0;
+            left: -280px;
+            width: 280px;
+            height: 100%;
+            background: var(--dark);
+            z-index: 1000;
+            transition: left 0.3s ease;
+            overflow-y: auto;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.5);
+            border-right: 1px solid var(--primary);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .side-menu.open {
+            left: 0;
+        }
+        
+        .side-menu-header {
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #333;
+        }
+        
+        .side-menu-logo {
+            display: flex;
+            align-items: center;
+            font-size: 20px;
+            font-weight: bold;
+            color: var(--light);
+        }
+        
+        .side-menu-logo i {
+            color: var(--primary);
+            font-size: 24px;
+            margin-right: 10px;
+        }
+        
+        .side-menu-close {
+            background: transparent;
+            border: none;
+            color: var(--text-light);
+            font-size: 20px;
+            cursor: pointer;
+        }
+        
+        .side-menu-items {
+            padding: 10px 0;
+            flex: 1;
+        }
+        
+        .side-menu-item {
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: var(--text-light);
+            text-decoration: none;
+            transition: all 0.2s;
+            border-bottom: 1px solid #222;
+        }
+        
+        .side-menu-item:hover {
+            background: rgba(255,255,255,0.1);
+            color: var(--primary);
+        }
+        
+        .side-menu-item i {
+            width: 20px;
+            text-align: center;
+        }
+        
+        .menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.7);
+            z-index: 999;
+            display: none;
+        }
+        
+        .menu-overlay.show {
+            display: block;
+        }
+        
+        /* Menu button in header */
+        .menu-btn {
+            background: transparent;
+            border: none;
+            color: var(--primary);
+            font-size: 24px;
+            cursor: pointer;
+            margin-right: 15px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 20px;
-            cursor: pointer;
-            z-index: 400;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
-            transition: all 0.3s;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
         }
         
-        .upload-btn:hover {
-            transform: scale(1.1);
+        .menu-btn.hidden {
+            opacity: 0;
+            visibility: hidden;
+            width: 0;
+            margin: 0;
+            padding: 0;
         }
         
         /* Ad container styles */
@@ -362,67 +452,139 @@
             margin-bottom: 15px;
         }
         
-        .share-modal {
-            max-width: 400px;
-            text-align: center;
+        .upload-modal {
+            max-width: 500px;
         }
         
-        .share-options {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
+        .upload-form {
+            display: flex;
+            flex-direction: column;
             gap: 15px;
-            margin-top: 20px;
         }
         
-        .share-option {
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        
+        .form-group label {
+            font-size: 14px;
+            color: var(--text-light);
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #333;
+            background: #2a2a2a;
+            color: var(--text-light);
+            font-size: 14px;
+        }
+        
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        
+        .submit-btn {
+            padding: 12px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        
+        .submit-btn:hover {
+            background: var(--secondary);
+        }
+        
+        .detect-btn {
+            padding: 8px 12px;
+            background: #333;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 12px;
+            cursor: pointer;
+            align-self: flex-start;
+            margin-top: 5px;
+        }
+        
+        .detect-btn:hover {
+            background: #444;
+        }
+        
+        /* Side menu footer */
+        .side-menu-footer {
+            padding: 20px;
+            margin-top: auto;
+            text-align: center;
+            border-top: 1px solid #333;
             display: flex;
             flex-direction: column;
             align-items: center;
+        }
+        
+        .copyright {
+            font-size: 12px;
+            color: #aaa;
+            margin-top: 10px;
+        }
+        
+        /* Side menu category items - MOVED TO TOP */
+        .side-menu-category {
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: var(--text-light);
+            text-decoration: none;
+            transition: all 0.2s;
+            border-bottom: 1px solid #222;
             cursor: pointer;
-            padding: 10px;
-            border-radius: 8px;
-            transition: background 0.2s;
         }
         
-        .share-option:hover {
-            background: rgba(255, 255, 255, 0.1);
+        .side-menu-category:hover {
+            background: rgba(255,255,255,0.1);
+            color: var(--primary);
         }
         
-        .share-icon {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
+        .side-menu-category.active {
+            color: var(--primary);
+            background: rgba(255,0,0,0.1);
+        }
+        
+        .side-menu-category i {
+            width: 20px;
+            text-align: center;
+        }
+        
+        /* Side menu upload button - CENTERED AT BOTTOM */
+        .side-menu-upload {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            margin: 20px auto;
+            font-weight: bold;
+            cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 24px;
-            margin-bottom: 8px;
-            color: white;
+            gap: 10px;
+            width: 80%;
+            max-width: 200px;
         }
         
-        .share-icon.telegram {
-            background: #0088cc;
-        }
-        
-        .share-icon.whatsapp {
-            background: #25D366;
-        }
-        
-        .share-icon.facebook {
-            background: #3b5998;
-        }
-        
-        .share-icon.twitter {
-            background: #1DA1F2;
-        }
-        
-        .share-icon.link {
-            background: var(--primary);
-        }
-        
-        .share-label {
-            font-size: 12px;
-            text-align: center;
+        .side-menu-upload:hover {
+            background: var(--secondary);
         }
         
         .main-app {
@@ -441,6 +603,11 @@
             position: sticky;
             top: 0;
             z-index: 100;
+        }
+        
+        .header-left {
+            display: flex;
+            align-items: center;
         }
         
         .logo {
@@ -527,10 +694,10 @@
             flex-shrink: 0;
             background: transparent;
             border: none;
+            color: var(--text-light);
         }
         
         .search-icon i {
-            color: var(--text-light);
             font-size: 16px;
         }
         
@@ -590,63 +757,17 @@
             to { transform: rotate(360deg); }
         }
         
-        .categories {
-            display: flex;
-            gap: 12px;
-            padding: 10px 15px;
-            border-bottom: 1px solid #333;
-            position: sticky;
-            top: 60px;
-            background: var(--dark);
-            z-index: 90;
-            overflow-x: auto;
-            scrollbar-width: none;
-            -webkit-overflow-scrolling: touch;
-            justify-content: center;
-        }
-        
-        .categories::-webkit-scrollbar {
-            display: none;
-        }
-        
-        .category-tab {
-            padding: 5px 0;
-            color: var(--text-light);
-            cursor: pointer;
-            position: relative;
-            font-size: 14px;
-            font-weight: 500;
-            white-space: nowrap;
-            flex-shrink: 0;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            background: transparent;
-            border: none;
-        }
-        
-        .category-tab.active {
-            color: var(--primary);
-        }
-        
-        .category-tab.active:after {
-            content: '';
-            position: absolute;
-            bottom: -11px;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: var(--primary);
-        }
+        /* REMOVED CATEGORIES SECTION */
         
         .content-section {
             padding: 12px;
             padding-bottom: 70px;
             overflow-y: auto;
-            height: calc(100vh - 120px);
+            height: calc(100vh - 60px);
             -webkit-overflow-scrolling: touch;
         }
         
+        /* DOUBLE COLUMN GRID */
         .video-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -843,15 +964,18 @@
             text-overflow: ellipsis;
             white-space: nowrap;
             max-width: 60%;
+            display: flex;
+            align-items: center;
+            gap: 4px;
         }
         
         .view-count {
             display: flex;
             align-items: center;
+            gap: 4px;
         }
         
         .view-count i {
-            margin-right: 3px;
             font-size: 10px;
         }
         
@@ -982,162 +1106,6 @@
             100% { opacity: 0; }
         }
         
-        /* Upload modal styles */
-        .upload-modal {
-            max-width: 500px;
-        }
-        
-        .upload-form {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-        
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-        }
-        
-        .form-group label {
-            font-size: 14px;
-            color: var(--text-light);
-        }
-        
-        .form-group input,
-        .form-group textarea,
-        .form-group select {
-            padding: 10px;
-            border-radius: 5px;
-            border: 1px solid #333;
-            background: #2a2a2a;
-            color: var(--text-light);
-            font-size: 14px;
-        }
-        
-        .form-group textarea {
-            min-height: 100px;
-            resize: vertical;
-        }
-        
-        .submit-btn {
-            padding: 12px;
-            background: var(--primary);
-            color: white;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-            cursor: pointer;
-            margin-top: 10px;
-        }
-        
-        .submit-btn:hover {
-            background: var(--secondary);
-        }
-        
-        .detect-btn {
-            padding: 8px 12px;
-            background: #333;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            font-size: 12px;
-            cursor: pointer;
-            align-self: flex-start;
-            margin-top: 5px;
-        }
-        
-        .detect-btn:hover {
-            background: #444;
-        }
-        
-        /* Settings dropdown styles - Updated with professional close button */
-        .settings-dropdown {
-            position: relative;
-            display: inline-block;
-        }
-        
-        .settings-menu {
-            position: fixed;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-            background: var(--gray);
-            border: 1px solid var(--primary);
-            border-radius: 8px;
-            min-width: 250px;
-            z-index: 100;
-            display: none;
-            box-shadow: 0 2px 15px rgba(0,0,0,0.7);
-            padding: 15px;
-        }
-        
-        .settings-menu.show {
-            display: block;
-        }
-        
-        .settings-menu-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid #333;
-        }
-        
-        .settings-menu-title {
-            font-size: 18px;
-            font-weight: bold;
-            color: var(--primary);
-        }
-        
-        .settings-menu-close {
-            width: 24px;
-            height: 24px;
-            background: var(--primary);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 12px;
-            cursor: pointer;
-            border: none;
-            outline: none;
-            transition: all 0.2s;
-        }
-        
-        .settings-menu-close:hover {
-            transform: scale(1.1);
-            background: var(--secondary);
-        }
-        
-        .settings-item {
-            padding: 12px 15px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-size: 14px;
-            border-radius: 5px;
-            transition: all 0.2s;
-            background: transparent;
-            border: none;
-            color: var(--text-light);
-            width: 100%;
-            text-align: left;
-        }
-        
-        .settings-item:hover {
-            background: rgba(255,255,255,0.1);
-        }
-        
-        .settings-item i {
-            width: 20px;
-            text-align: center;
-            color: var(--primary);
-        }
-        
         @media (min-width: 480px) {
             .search-box {
                 height: 44px;
@@ -1208,6 +1176,34 @@
                 font-size: 16px;
             }
         }
+        
+        @media screen and (max-width: 480px) {
+            .header {
+                padding: 10px;
+            }
+            
+            .logo {
+                font-size: 18px;
+            }
+            
+            .content-section {
+                padding: 10px;
+                padding-bottom: 60px;
+                height: calc(100vh - 50px);
+            }
+            
+            .video-info {
+                padding: 6px;
+            }
+            
+            .video-title {
+                font-size: 13px;
+            }
+            
+            .video-description {
+                font-size: 11px;
+            }
+        }
     </style>
 </head>
   
@@ -1218,6 +1214,79 @@
         <p>Please check your network settings and try again</p>
         <button id="retryConnection">Try Again</button>
     </div>
+
+    <!-- Side Menu -->
+    <div class="side-menu" id="sideMenu">
+        <div class="side-menu-header">
+            <div class="side-menu-logo">
+                <i class="fa fa-play-circle" aria-hidden="true"></i>
+                <span>Santali Premium</span>
+            </div>
+            <button class="side-menu-close" id="sideMenuClose">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <!-- MOVED CATEGORIES TO TOP -->
+        <div class="side-menu-items">
+            <!-- Category tabs in side menu - MOVED TO TOP -->
+            <div class="side-menu-category active" data-category="all">
+                <i class="fa fa-th-list"></i>
+                <span>All Videos</span>
+            </div>
+            <div class="side-menu-category" data-category="album">
+                <i class="fa fa-play-circle"></i>
+                <span>Album</span>
+            </div>
+            <div class="side-menu-category" data-category="movie">
+                <i class="fas fa-film"></i>
+                <span>Movie</span>
+            </div>
+            <div class="side-menu-category" data-category="comedy">
+                <i class="fas fa-laugh-squint"></i>
+                <span>Comedy</span>
+            </div>
+            <div class="side-menu-category" data-category="studio">
+                <i class="fa-solid fa-microphone-lines"></i>
+                <span>Studio version</span>
+            </div>
+            
+            <!-- Other menu items moved below categories -->
+            <a href="#" class="side-menu-item" id="sidePrivacyBtn">
+                <i class="fas fa-shield-alt"></i>
+                <span>Privacy Policy</span>
+            </a>
+            <a href="#" class="side-menu-item" id="sideDisclaimerBtn">
+                <i class="fas fa-exclamation-circle"></i>
+                <span>Disclaimer</span>
+            </a>
+            <a href="#" class="side-menu-item" id="sideTermsBtn">
+                <i class="fas fa-file-contract"></i>
+                <span>Terms & Conditions</span>
+            </a>
+            <a href="#" class="side-menu-item" id="sideAboutBtn">
+                <i class="fas fa-info-circle"></i>
+                <span>About Us</span>
+            </a>
+            <a href="#" class="side-menu-item" id="sideContactBtn">
+                <i class="fas fa-envelope"></i>
+                <span>Contact Us</span>
+            </a>
+        </div>
+        
+        <div class="side-menu-footer">
+            <!-- UPLOAD BUTTON CENTERED AT BOTTOM -->
+            <button class="side-menu-upload" id="sideUploadBtn">
+                <i class="fas fa-cloud-arrow-up"></i>
+                Upload Video
+            </button>
+            <div class="copyright">
+                Copyright © 2025 santalipremium.com
+            </div>
+        </div>
+    </div>
+    
+    <div class="menu-overlay" id="menuOverlay"></div>
 
     <div class="video-player" id="videoPlayer">
         <div class="video-player-container" id="videoPlayerContainer">
@@ -1232,11 +1301,6 @@
             </div>
             <iframe id="videoPlayerIframe" frameborder="0" allowfullscreen></iframe>
         </div>
-    </div>
-    
-    <!-- Upload Button - Position updated in CSS -->
-    <div class="upload-btn" id="uploadBtn">
-        <i class="fas fa-cloud-arrow-up"></i>
     </div>
     
     <!-- Upload Modal -->
@@ -1292,11 +1356,9 @@
             </div>
             <div class="modal-body">
                 <h1>Privacy Policy</h1>
-                <p>Your privacy is important to us. This Privacy Policy explains how Santali Premium collects, uses, and protects your personal information.</p>
-                <p>We collect information you provide directly to us, such as when you upload content or contact us for support.</p>
-                <p>We use this information to operate, maintain, and provide you with the features and functionality of our service.</p>
-                <p>We may share your information with third-party service providers who help us provide our services.</p>
-                <p>By using our service, you consent to our Privacy Policy.</p>
+                <a href="https://www.termsfeed.com/live/0204b386-784b-4101-b0c6-b6c868e77d76" target="_blank">
+  Privacy Policy
+</a>
             </div>
         </div>
     </div>
@@ -1311,10 +1373,9 @@
             </div>
             <div class="modal-body">
                 <h1>Disclaimer</h1>
-                <p>Santali Premium is a platform for sharing and discovering Santali content. We do not claim ownership of any videos shared on our platform.</p>
-                <p>All videos are property of their respective owners. We simply provide a platform for users to share and discover content.</p>
-                <p>If you believe that any content infringes on your copyright, please contact us immediately at Dillipsoren640@gmail.com with details of the infringement.</p>
-                <p>We will promptly remove any content that violates copyright laws.</p>
+                <a href="https://www.termsfeed.com/live/73d4c114-22a5-43e5-a333-9f691c966318" target="_blank">
+  Disclaimer
+</a>
             </div>
         </div>
     </div>
@@ -1329,15 +1390,9 @@
             </div>
             <div class="modal-body">
                 <h1>Terms and Conditions</h1>
-                <p>By using Santali Premium, you agree to the following terms and conditions:</p>
-                <ul>
-                    <li>You are responsible for any content you upload to the platform</li>
-                    <li>You will not upload any content that violates copyright laws</li>
-                    <li>You will not upload any inappropriate or offensive content</li>
-                    <li>We reserve the right to remove any content that violates our policies</li>
-                    <li>We may terminate your access to the platform for violations of these terms</li>
-                </ul>
-                <p>These terms may be updated from time to time. Continued use of the platform constitutes acceptance of the updated terms.</p>
+                <a href="https://www.termsfeed.com/live/d3747ea2-6ba3-4820-bba2-1d9067254a38" target="_blank">
+  Terms and Conditions
+</a>       
             </div>
         </div>
     </div>
@@ -1352,10 +1407,8 @@
             </div>
             <div class="modal-body">
                 <h3>Important Notice</h3>
-                <p>Jahai ko nowa aap re YouTube video doho sana peya ing aa WhatsApp number re ( +91 9438582096 ) . Original content hui koma. first ale le nel aa apeya content R YouTube channel judi Genuine hui kowa , enkhan apeya video link nowa aap re jaga nam lagid daw ( approve ) nam aay.</p>
+                <p>Jahai ko nowa aap re YouTube video link doho sana peya ing aa WhatsApp number re ( +91 9438582096 ) jogajog pe  . Original content hui koma. first ale le nel aa apeya content R YouTube channel judi Genuine hui kowa , enkhan apeya video link nowa aap re jaga nam lagid daw ( approve ) nam aay.</p>
                 
-                <h3>Notification Settings</h3>
-                <p>You can manage your notification preferences in your device settings.</p>
             </div>
         </div>
     </div>
@@ -1385,51 +1438,38 @@
         </div>
     </div>
     
-    <div class="modal-overlay" id="shareModal">
-        <div class="modal-content share-modal">
+    <div class="modal-overlay" id="contactModal">
+        <div class="modal-content">
             <div class="modal-header">
-                <div class="modal-title">Share Content</div>
-                <div class="modal-close" id="shareClose">
+                <div class="modal-title">Contact Us</div>
+                <div class="modal-close" id="contactClose">
                     <i class="fas fa-times"></i>
                 </div>
             </div>
             <div class="modal-body">
-                <p>Share this content with your friends:</p>
-                <div class="share-options">
-                    <div class="share-option" id="shareWhatsApp">
-                        <div class="share-icon whatsapp">
-                            <i class="fab fa-whatsapp"></i>
-                        </div>
-                        <div class="share-label">WhatsApp</div>
-                    </div>
-                    <div class="share-option" id="shareFacebook">
-                        <div class="share-icon facebook">
-                            <i class="fab fa-facebook-f"></i>
-                        </div>
-                        <div class="share-label">Facebook</div>
-                    </div>
-                    <div class="share-option" id="shareTwitter">
-                        <div class="share-icon twitter">
-                            <i class="fab fa-twitter"></i>
-                        </div>
-                        <div class="share-label">Twitter</div>
-                    </div>
-                    <div class="share-option" id="shareLink">
-                        <div class="share-icon link">
-                            <i class="fas fa-link"></i>
-                        </div>
-                        <div class="share-label">Copy Link</div>
-                    </div>
-                </div>
+                <h3>Get in Touch</h3>
+                <p>We'd love to hear from you! Reach out to us through any of the following channels:</p>
+                
+                <h3>Email</h3>
+                <p>Dillipsoren640@gmail.com</p>
+                
+                <h3>WhatsApp</h3>
+                <p>+91 9438582096</p>
+                
+                
             </div>
         </div>
     </div>
     
     <div class="main-app" id="mainApp">
         <header class="header">
-            <div class="logo" id="appLogo">
-            	<i class="fa fa-play-circle" aria-hidden="true" style="color:red; font-size:30px;  margin:0 5px;"></i>
-                <span>Santali Premium</span>
+            <div class="header-left">
+                <button class="menu-btn" id="menuButton">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="logo" id="appLogo">
+                    <span>Santali Premium</span>
+                </div>
             </div>
             
             <div class="search-container">
@@ -1437,34 +1477,6 @@
                     <i class="fas fa-arrow-left"></i>
                 </button>
                 <div class="title-bar">
-                    <div class="settings-dropdown">
-                        <i class="fa-solid fa-gear" id="gearButton"></i>
-                        <div class="settings-menu" id="settingsMenu">
-                            <div class="settings-menu-header">
-                                <div class="settings-menu-title">Settings</div>
-                                <button class="settings-menu-close" id="settingsMenuClose">
-                                    <i class="fas fa-times"></i>
-                                </button>
-                            </div>
-                            <button class="settings-item" id="privacyBtn">
-                                <i class="fas fa-shield-alt"></i>
-                                <span>Privacy Policy</span>
-                            </button>
-                            <button class="settings-item" id="disclaimerBtn">
-                                <i class="fas fa-exclamation-circle"></i>
-                                <span>Disclaimer</span>
-                            </button>
-                            <button class="settings-item" id="termsBtn">
-                                <i class="fas fa-file-contract"></i>
-                                <span>Terms & Conditions</span>
-                            </button>
-                            <button class="settings-item" id="aboutBtn">
-                                <i class="fas fa-info-circle"></i>
-                                <span>About Us</span>
-                            </button>
-                        </div>
-                    </div>
-                    <i class="fa-solid fa-bell" id="bellButton"></i>
                     <button class="refresh-btn" id="refreshButton">
                         <i class="fas fa-sync-alt"></i>
                     </button>
@@ -1478,28 +1490,7 @@
             </div>
         </header>
         
-        <div class="categories" id="categories">
-            <button class="category-tab active" data-category="all" aria-label="All videos">
-                <i class="fa fa-th-list"></i>
-                <span>All</span>
-            </button>
-            <button class="category-tab" data-category="album" aria-label="Albums">
-                <i class="fa fa-play-circle"></i>
-                <span>Album</span>
-            </button>
-            <button class="category-tab" data-category="movie" aria-label="Movies">
-                <i class="fas fa-film"></i>
-                <span>Movie</span>
-            </button>
-            <button class="category-tab" data-category="comedy" aria-label="Comedy">
-                <i class="fas fa-laugh-squint"></i>
-                <span>Comedy</span>
-            </button>
-            <button class="category-tab" data-category="studio" aria-label="Studio">
-                <i class="fa-solid fa-microphone-lines"></i>
-                <span>Studio version</span>
-            </button>
-        </div>
+        <!-- REMOVED CATEGORIES SECTION -->
         
         <div class="content-section" id="videosSection">
             <div class="video-grid" id="videosGrid">
@@ -1550,28 +1541,21 @@
         const noInternet = document.getElementById('noInternet');
         const retryConnection = document.getElementById('retryConnection');
         const videosSection = document.getElementById('videosSection');
-        const categories = document.getElementById('categories');
-        const categoryTabs = document.querySelectorAll('.category-tab');
         const privacyModal = document.getElementById('privacyModal');
         const disclaimerModal = document.getElementById('disclaimerModal');
         const termsModal = document.getElementById('termsModal');
         const notificationModal = document.getElementById('notificationModal');
         const aboutModal = document.getElementById('aboutModal');
-        const shareModal = document.getElementById('shareModal');
+        const contactModal = document.getElementById('contactModal');
         const privacyClose = document.getElementById('privacyClose');
         const disclaimerClose = document.getElementById('disclaimerClose');
         const termsClose = document.getElementById('termsClose');
         const notificationClose = document.getElementById('notificationClose');
         const aboutClose = document.getElementById('aboutClose');
-        const shareClose = document.getElementById('shareClose');
-        const shareWhatsApp = document.getElementById('shareWhatsApp');
-        const shareFacebook = document.getElementById('shareFacebook');
-        const shareTwitter = document.getElementById('shareTwitter');
-        const shareLink = document.getElementById('shareLink');
+        const contactClose = document.getElementById('contactClose');
         const refreshButton = document.getElementById('refreshButton');
         const toast = document.getElementById('toast');
         const titleBar = document.querySelector('.title-bar');
-        const uploadBtn = document.getElementById('uploadBtn');
         const uploadModal = document.getElementById('uploadModal');
         const uploadClose = document.getElementById('uploadClose');
         const uploadForm = document.getElementById('uploadForm');
@@ -1581,14 +1565,19 @@
         const videoChannel = document.getElementById('videoChannel');
         const videoCategory = document.getElementById('videoCategory');
         const detectBtn = document.getElementById('detectBtn');
-        const gearButton = document.getElementById('gearButton');
-        const settingsMenu = document.getElementById('settingsMenu');
-        const settingsMenuClose = document.getElementById('settingsMenuClose');
-        const privacyBtn = document.getElementById('privacyBtn');
-        const disclaimerBtn = document.getElementById('disclaimerBtn');
-        const termsBtn = document.getElementById('termsBtn');
-        const aboutBtn = document.getElementById('aboutBtn');
-        const bellButton = document.getElementById('bellButton');
+        
+        // Side menu elements
+        const sideMenu = document.getElementById('sideMenu');
+        const menuButton = document.getElementById('menuButton');
+        const sideMenuClose = document.getElementById('sideMenuClose');
+        const menuOverlay = document.getElementById('menuOverlay');
+        const sidePrivacyBtn = document.getElementById('sidePrivacyBtn');
+        const sideDisclaimerBtn = document.getElementById('sideDisclaimerBtn');
+        const sideTermsBtn = document.getElementById('sideTermsBtn');
+        const sideAboutBtn = document.getElementById('sideAboutBtn');
+        const sideContactBtn = document.getElementById('sideContactBtn');
+        const sideUploadBtn = document.getElementById('sideUploadBtn');
+        const sideMenuCategories = document.querySelectorAll('.side-menu-category');
 
         // Global variables
         let videos = [];
@@ -1600,18 +1589,12 @@
         let playerStartY = 0;
         let playerOffsetX = 0;
         let playerOffsetY = 0;
-        let currentLinkIndex = 0;
-        const linksToRotate = [
-            "https://whatsapp.com/channel/0029Va9EkVfLikgDuskIqr3P",
-            "https://www.youtube.com/@santalipremium"
-        ];
 
         // Initialize app
         function initApp() {
             checkInternetConnection();
             loadVideos();
             setupEventListeners();
-            startLinkRotation();
         }
 
         // Check internet connection
@@ -1640,6 +1623,63 @@
                     noInternet.style.display = 'none';
                     mainApp.style.display = 'block';
                 }
+            });
+
+            // Side menu functionality
+            menuButton.addEventListener('click', openSideMenu);
+            sideMenuClose.addEventListener('click', closeSideMenu);
+            menuOverlay.addEventListener('click', closeSideMenu);
+            
+            // Side menu items
+            sidePrivacyBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                closeSideMenu();
+                privacyModal.classList.add('show');
+            });
+            
+            sideDisclaimerBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                closeSideMenu();
+                disclaimerModal.classList.add('show');
+            });
+            
+            sideTermsBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                closeSideMenu();
+                termsModal.classList.add('show');
+            });
+            
+            sideAboutBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                closeSideMenu();
+                aboutModal.classList.add('show');
+            });
+            
+            sideContactBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                closeSideMenu();
+                contactModal.classList.add('show');
+            });
+            
+            sideUploadBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                closeSideMenu();
+                uploadModal.classList.add('show');
+            });
+            
+            // Side menu category selection
+            sideMenuCategories.forEach(category => {
+                category.addEventListener('click', () => {
+                    const categoryType = category.dataset.category;
+                    currentCategory = categoryType;
+                    
+                    // Update active states
+                    sideMenuCategories.forEach(cat => cat.classList.remove('active'));
+                    category.classList.add('active');
+                    
+                    filterVideosByCategory();
+                    closeSideMenu();
+                });
             });
 
             // Search functionality
@@ -1674,16 +1714,6 @@
                 filterVideosByCategory();
             });
 
-            // Category filtering
-            categoryTabs.forEach(tab => {
-                tab.addEventListener('click', () => {
-                    categoryTabs.forEach(t => t.classList.remove('active'));
-                    tab.classList.add('active');
-                    currentCategory = tab.dataset.category;
-                    filterVideosByCategory();
-                });
-            });
-
             // Video player controls
             videoPlayerClose.addEventListener('click', closeVideoPlayer);
 
@@ -1693,11 +1723,7 @@
             termsClose.addEventListener('click', () => termsModal.classList.remove('show'));
             notificationClose.addEventListener('click', () => notificationModal.classList.remove('show'));
             aboutClose.addEventListener('click', () => aboutModal.classList.remove('show'));
-            shareClose.addEventListener('click', () => shareModal.classList.remove('show'));
-            settingsMenuClose.addEventListener('click', (e) => {
-                e.stopPropagation();
-                settingsMenu.classList.remove('show');
-            });
+            contactClose.addEventListener('click', () => contactModal.classList.remove('show'));
             
             document.addEventListener('click', (e) => {
                 if (e.target.classList.contains('modal-overlay')) {
@@ -1706,10 +1732,6 @@
             });
 
             // Upload functionality
-            uploadBtn.addEventListener('click', () => {
-                uploadModal.classList.add('show');
-            });
-            
             uploadClose.addEventListener('click', () => {
                 uploadModal.classList.remove('show');
             });
@@ -1723,69 +1745,6 @@
             uploadForm.addEventListener('submit', (e) => {
                 e.preventDefault();
                 uploadVideo();
-            });
-
-            // Settings menu functionality
-            gearButton.addEventListener('click', (e) => {
-                e.stopPropagation();
-                settingsMenu.classList.toggle('show');
-            });
-            
-            // Close settings menu when clicking outside
-            document.addEventListener('click', (e) => {
-                if (!e.target.closest('.settings-dropdown')) {
-                    settingsMenu.classList.remove('show');
-                }
-            });
-            
-            // Settings menu items
-            privacyBtn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                settingsMenu.classList.remove('show');
-                privacyModal.classList.add('show');
-            });
-            
-            disclaimerBtn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                settingsMenu.classList.remove('show');
-                disclaimerModal.classList.add('show');
-            });
-            
-            termsBtn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                settingsMenu.classList.remove('show');
-                termsModal.classList.add('show');
-            });
-            
-            aboutBtn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                settingsMenu.classList.remove('show');
-                aboutModal.classList.add('show');
-            });
-
-            // Notification button
-            bellButton.addEventListener('click', (e) => {
-                e.stopPropagation();
-                notificationModal.classList.add('show');
-            });
-
-            // Sharing functionality
-            shareWhatsApp.addEventListener('click', () => {
-                shareContent('whatsapp');
-            });
-            
-            shareFacebook.addEventListener('click', () => {
-                shareContent('facebook');
-            });
-            
-            shareTwitter.addEventListener('click', () => {
-                shareContent('twitter');
-            });
-            
-            shareLink.addEventListener('click', () => {
-                copyToClipboard(linksToRotate[currentLinkIndex]);
-                showToast('Link copied to clipboard!');
-                shareModal.classList.remove('show');
             });
 
             // Video player drag functionality for desktop
@@ -1808,6 +1767,17 @@
                     refreshButton.classList.remove('rotating');
                 }, 1000);
             });
+        }
+
+        // Side menu functions
+        function openSideMenu() {
+            sideMenu.classList.add('open');
+            menuOverlay.classList.add('show');
+        }
+        
+        function closeSideMenu() {
+            sideMenu.classList.remove('open');
+            menuOverlay.classList.remove('show');
         }
 
         // Setup video player drag functionality
@@ -2133,13 +2103,6 @@
             }
         }
 
-        // Start rotating links in the share modal
-        function startLinkRotation() {
-            setInterval(() => {
-                currentLinkIndex = (currentLinkIndex + 1) % linksToRotate.length;
-            }, 5000); // Rotate every 5 seconds
-        }
-
         // Shuffle array function
         function shuffleArray(array) {
             for (let i = array.length - 1; i > 0; i--) {
@@ -2220,7 +2183,7 @@
             
             try {
                 // Get current date in YYYY-MM-DD format
-                const today = new Date().toISOString().split('T')[0];
+                const today = new Date().toISO().split('T')[0];
                 
                 // Update total clicks
                 const videoRef = database.ref(`videos/${video.id}`);
@@ -2441,6 +2404,7 @@
             backButton.classList.add('active');
             searchInput.focus();
             titleBar.style.display = 'none';
+            menuButton.classList.add('hidden');
         }
 
         function deactivateSearch() {
@@ -2449,29 +2413,7 @@
             backButton.classList.remove('active');
             searchInput.value = '';
             titleBar.style.display = 'flex';
-        }
-
-        function shareContent(platform) {
-            const shareUrl = encodeURIComponent(linksToRotate[currentLinkIndex]);
-            const shareText = encodeURIComponent('Check out this awesome Santali Premium content!');
-            let url;
-
-            switch (platform) {
-                case 'whatsapp':
-                    url = `https://wa.me/?text=${shareText}%20${shareUrl}`;
-                    break;
-                case 'facebook':
-                    url = `https://www.facebook.com/sharer/sharer.php?u=${shareUrl}`;
-                    break;
-                case 'twitter':
-                    url = `https://twitter.com/intent/tweet?url=${shareUrl}&text=${shareText}`;
-                    break;
-                default:
-                    return;
-            }
-
-            window.open(url, '_blank');
-            shareModal.classList.remove('show');
+            menuButton.classList.remove('hidden');
         }
 
         function generateUniqueId() {
